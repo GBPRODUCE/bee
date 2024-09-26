@@ -110,10 +110,30 @@
         table th:nth-child(4) {
             width: 15%;
         }
+                /* 返回首頁按鈕的樣式 */
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-
+<div class="container">
+    <!-- 返回首頁按鈕 -->
+    <button class="back-button" onclick="window.location.href='index.html'">返回首頁</button>
+</div>
 <div class="container">
     <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
 
