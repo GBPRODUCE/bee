@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月末黑貓明細總表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+        }
+        p {
+            text-align: center;
+            font-size: 16px;
+            margin: 0;
+            color: #666;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .signature {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        .signature label {
+            margin-right: 10px;
+        }
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"]:focus, input[type="date"]:focus {
+            border-color: #4CAF50;
+            background-color: #fff;
+            outline: none;
+        }
+        .centered-checkbox {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .signature input[type="text"] {
+            width: 250px; /* 控制寄件人輸入框的寬度 */
+            margin-left: 5px;
+        }
+        /* 使黑貓單號和輸入框同列且置中 */
+        .trackingNumberContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .trackingNumberContainer label {
+            margin-right: 10px;
+        }
+        .trackingNumberContainer input {
+            width: 250px;
+        }
+        /* 調整表格列寬 */
+        table th, table td {
+            width: auto;
+        }
+        table th:nth-child(1) {
+            width: 1%;
+        }
+        table th:nth-child(2) {
+            width: 19%;
+        }
+        table th:nth-child(3) {
+            width: 13%;
+        }
+        table th:nth-child(4) {
+            width: 35%;
+        }
+        table th:nth-child(5) {
+            width: 31%;
+        }
+        table th:nth-child(6) {
+            width: 1%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
+
+    <table>
+        <tr>
+            <th>序</th>
+            <th>黑貓單號</th>
+            <th>收件人</th>
+            <th>收件地址</th>
+            <th>內容物</th>
+            <th>總公司</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="blackcat1" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name1" title="輸入收件人"></td>
+            <td><input type="text" name="address1" title="輸入收件地址"></td>
+            <td><input type="text" name="box1" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="blackcat2" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name2" title="輸入收件人"></td>
+            <td><input type="text" name="address2" title="輸入收件地址"></td>
+            <td><input type="text" name="box2" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><input type="text" name="blackcat3" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name3" title="輸入收件人"></td>
+            <td><input type="text" name="address3" title="輸入收件地址"></td>
+            <td><input type="text" name="box3" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><input type="text" name="blackcat4" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name4" title="輸入收件人"></td>
+            <td><input type="text" name="address4" title="輸入收件地址"></td>
+            <td><input type="text" name="box4" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><input type="text" name="blackcat5" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name5" title="輸入收件人"></td>
+            <td><input type="text" name="address5" title="輸入收件地址"></td>
+            <td><input type="text" name="box5" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><input type="text" name="blackcat6" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name6" title="輸入收件人"></td>
+            <td><input type="text" name="address6" title="輸入收件地址"></td>
+            <td><input type="text" name="box6" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><input type="text" name="blackcat7" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name7" title="輸入收件人"></td>
+            <td><input type="text" name="address7" title="輸入收件地址"></td>
+            <td><input type="text" name="box7" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td><input type="text" name="blackcat8" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name8" title="輸入收件人"></td>
+            <td><input type="text" name="address8" title="輸入收件地址"></td>
+            <td><input type="text" name="box8" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td><input type="text" name="blackcat9" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name9" title="輸入收件人"></td>
+            <td><input type="text" name="address9" title="輸入收件地址"></td>
+            <td><input type="text" name="box9" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td><input type="text" name="blackcat10" title="輸入12碼黑貓單號"></td>
+            <td><input type="text" name="name10" title="輸入收件人"></td>
+            <td><input type="text" name="address10" title="輸入收件地址"></td>
+            <td><input type="text" name="box10" title="輸入包裹內容物"></td>
+            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
