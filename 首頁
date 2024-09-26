@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物流明細首頁</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>物流明細首頁</h1>
+    </header>
+
+    <div class="container">
+        <a href="branch-login.html" class="card">
+            <h2>分店登入入口</h2>
+            <p>進入分店管理系統</p>
+        </a>
+        <a href="single-shipment.html" class="card">
+            <h2>單次寄件明細表</h2>
+            <p>查看單次寄件資料</p>
+        </a>
+        <a href="monthly-summary.html" class="card">
+            <h2>月末寄件總表</h2>
+            <p>查看每月寄件統計報表</p>
+        </a>
+        <a href="admin-login.html" class="card">
+            <h2>管理員後台登入</h2>
+            <p>進入管理員後台系統</p>
+        </a>
+    </div>
+</body>
+</html>
