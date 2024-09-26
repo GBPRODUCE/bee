@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分店登入介面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>分店登入</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="account-id">帳號 (統一編號)</label>
+                <input type="text" id="account-id" name="account-id" placeholder="請輸入統一編號" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密碼 (電話號碼)</label>
+                <input type="password" id="password" name="password" placeholder="請輸入電話號碼" required>
+            </div>
+            <div class="error-message" id="error-message"></div>
+            <button type="button" onclick="login()">登入</button>
+        </form>
+    </div>
+
+    <script>
+        // 模擬登入檢查函數
+        function login() {
+            const accountId = document.getElementById("account-id").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("error-message");
+
+            // 模擬檢查條件
+            if (accountId === "12345678" && password === "02-12345678") {
+                alert("登入成功！");
+                window.location.href = "admin-dashboard.html";  // 導向到管理員後台
+            } else {
+                errorMessage.textContent = "帳號或密碼錯誤，請重新輸入。";
+            }
+        }
+    </script>
+</body>
+</html>
