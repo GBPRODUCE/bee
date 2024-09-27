@@ -3,62 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理員後台 - 分店管理</title>
+    <title>行政系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 0;
+            height: 100vh;
+            overflow: hidden; /* 防止頁面本身滾動 */
         }
+
         header {
-            background-color: #343a40;
+            background-color: #333;
             color: #fff;
-            padding: 15px;
             text-align: center;
+            padding:10px 0;
         }
+
         h1 {
             margin: 0;
+            font-size: 2em;
         }
+
         .container {
-            margin: 20px auto;
-            max-width: 1200px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            height: calc(100vh - 50px); /* 減去 header 的高度 */
         }
+
+        .sidebar {
+            width: 11%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 0;
+            margin: 10px 0;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .main-content {
+            flex: 1;
+            height: 90%;
+            overflow-y: auto; /* 設置垂直滾動條 */
+            padding: 20px;
+            padding-bottom: 100px; /* 增加底部內邊距以防止內容被遮擋 */
+            background: #f8f9fa;
+        }
+
+        .login-container, .container-content {
+            width: 90%;
+            margin: auto;
+        }
+
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+            margin-top: 20px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* 其他主要內容區域的樣式 */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         table, th, td {
             border: 1px solid #ddd;
         }
+
         th, td {
             padding: 12px;
             text-align: left;
         }
+
         th {
             background-color: #007bff;
             color: #fff;
         }
+
         .form-group {
             margin: 10px 0;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+
         input, select {
             width: 100%;
             padding: 8px;
             margin: 5px 0;
             box-sizing: border-box;
         }
-        .button {
-            margin-top: 10px;
-        }
+
         button {
             padding: 10px 15px;
             border: none;
@@ -67,209 +169,120 @@
             cursor: pointer;
             border-radius: 4px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .delete-btn {
             background-color: #dc3545;
         }
+
         .delete-btn:hover {
             background-color: #c82333;
         }
+
         .save-btn {
             background-color: #28a745;
         }
+
         .save-btn:hover {
             background-color: #218838;
-        }
-        .editable-select {
-            cursor: pointer;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 5px;
-        }
-                /* 返回首頁按鈕的樣式 */
-        .back-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>管理員後台 - 分店管理</h1>
+        <h1>行政系統</h1>
     </header>
-<div class="container">
-    <!-- 返回首頁按鈕 -->
-    <button class="back-button" onclick="window.location.href='index.html'">返回首頁</button>
-</div>
-    <div class="container">
-        <!-- 新增分店表單 -->
-        <h2>新增分店資訊</h2>
-        <form id="add-branch-form">
-            <div class="form-group">
-                <label for="branch-name">分店名稱</label>
-                <input type="text" id="branch-name" name="branch-name" required>
-            </div>
-            <div class="form-group">
-                <label for="branch-id">統一編號 (預設為帳號)</label>
-                <input type="text" id="branch-id" name="branch-id" required>
-            </div>
-            <div class="form-group">
-                <label for="branch-address">地址</label>
-                <input type="text" id="branch-address" name="branch-address" required>
-            </div>
-            <div class="form-group">
-                <label for="branch-phone">電話號碼 (預設為密碼)</label>
-                <input type="tel" id="branch-phone" name="branch-phone" required>
-            </div>
-            <div class="form-group">
-                <label for="branch-permission">使用權限</label>
-                <select id="branch-permission" name="branch-permission">
-                    <option value="user">使用者</option>
-                    <option value="admin">管理員</option>
-                </select>
-            </div>
-            <div class="button">
-                <button type="button" onclick="addBranch()">新增分店</button>
-            </div>
-        </form>
 
-        <!-- 分店資訊表格 -->
-        <h2>分店資訊列表</h2>
-        <table id="branch-table">
-            <thead>
-                <tr>
-                    <th>分店名稱</th>
-                    <th>統一編號 (帳號)</th>
-                    <th>地址</th>
-                    <th>電話號碼 (密碼)</th>
-                    <th>使用權限</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 預設範例資料 -->
-                <tr>
-                    <td>雲林斗六門市</td>
-                    <td>90778522</td>
-                    <td>雲林縣斗六市大學路三段245號</td>
-                    <td>055362300</td>
-                    <td>管理者</td>
-                    <td>
-                        <button class="edit-btn" onclick="editBranch(this)">編輯</button>
-                        <button class="delete-btn" onclick="deleteBranch(this)">刪除</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>高雄分店</td>
-                    <td>87654321</td>
-                    <td>高雄市前鎮區</td>
-                    <td>07-87654321</td>
-                    <td>管理員</td>
-                    <td>
-                        <button class="edit-btn" onclick="editBranch(this)">編輯</button>
-                        <button class="delete-btn" onclick="deleteBranch(this)">刪除</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
+        <!-- 左側選單 Sidebar Menu -->
+        <div class="sidebar">
+            <a href="single-shipment.html">黑貓寄件明細表</a>
+            <a href="monthly-summary.html">黑貓月末總明細</a>
+            <a href="admin-login.html">管理者後台系統</a>
+            <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
+            <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+        </div>
+
+        <!-- 主體內容區塊 Main Content -->
+        <div class="main-content">
+            <div class="container-content">
+                <!-- 新增分店表單 -->
+                <h2>新增分店資訊</h2>
+                <form id="add-branch-form">
+                    <div class="form-group">
+                        <label for="branch-name">分店名稱</label>
+                        <input type="text" id="branch-name" name="branch-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch-id">統一編號 (預設為帳號)</label>
+                        <input type="text" id="branch-id" name="branch-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch-address">地址</label>
+                        <input type="text" id="branch-address" name="branch-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch-phone">電話號碼 (預設為密碼)</label>
+                        <input type="tel" id="branch-phone" name="branch-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch-permission">使用權限</label>
+                        <select id="branch-permission" name="branch-permission">
+                            <option value="user">使用者</option>
+                            <option value="admin">管理員</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="addBranch()">新增分店</button>
+                </form>
+
+                <!-- 分店資訊表格 -->
+                <h2>分店資訊列表</h2>
+                <table id="branch-table">
+                    <thead>
+                        <tr>
+                            <th>分店名稱</th>
+                            <th>統一編號 (帳號)</th>
+                            <th>地址</th>
+                            <th>電話號碼 (密碼)</th>
+                            <th>使用權限</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>雲林斗六門市</td>
+                            <td>90778522</td>
+                            <td>雲林縣斗六市大學路三段245號</td>
+                            <td>055362300</td>
+                            <td>管理者</td>
+                            <td>
+                                <button class="edit-btn">編輯</button>
+                                <button class="delete-btn">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>高雄分店</td>
+                            <td>87654321</td>
+                            <td>高雄市前鎮區</td>
+                            <td>07-87654321</td>
+                            <td>管理員</td>
+                            <td>
+                                <button class="edit-btn">編輯</button>
+                                <button class="delete-btn">刪除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 新增分店功能
-        function addBranch() {
-            const name = document.getElementById("branch-name").value;
-            const id = document.getElementById("branch-id").value;
-            const address = document.getElementById("branch-address").value;
-            const phone = document.getElementById("branch-phone").value;
-            const permission = document.getElementById("branch-permission").value;
-
-            // 驗證欄位是否填寫完整
-            if (!name || !id || !address || !phone || !permission) {
-                alert("所有欄位都需要填寫！");
-                return;
-            }
-
-            // 創建新分店資料行
-            const table = document.getElementById("branch-table").getElementsByTagName("tbody")[0];
-            const newRow = table.insertRow();
-            newRow.insertCell(0).textContent = name;
-            newRow.insertCell(1).textContent = id;
-            newRow.insertCell(2).textContent = address;
-            newRow.insertCell(3).textContent = phone;
-            newRow.insertCell(4).textContent = permission;
-            const actionCell = newRow.insertCell(5);
-            actionCell.innerHTML = '<button class="edit-btn" onclick="editBranch(this)">編輯</button> <button class="delete-btn" onclick="deleteBranch(this)">刪除</button>';
-
-            // 清空表單
-            document.getElementById("add-branch-form").reset();
-        }
-
-        // 刪除分店功能
-        function deleteBranch(button) {
-            const row = button.parentElement.parentElement;
-            row.parentElement.removeChild(row);
-        }
-
-        // 編輯分店功能
-        function editBranch(button) {
-            const row = button.parentElement.parentElement;
-            const cells = row.getElementsByTagName("td");
-
-            for (let i = 0; i < cells.length - 1; i++) {
-                const content = cells[i].textContent;
-                if (i < 4) {
-                    cells[i].innerHTML = `<input type="text" value="${content}">`;
-                } else if (i === 4) {
-                    const options = `
-                        <select>
-                            <option value="user" ${content === "使用者" ? "selected" : ""}>使用者</option>
-                            <option value="admin" ${content === "管理員" ? "selected" : ""}>管理員</option>
-                        </select>`;
-                    cells[i].innerHTML = options;
-                }
-            }
-
-            // 更改按鈕為儲存
-            button.textContent = "儲存";
-            button.className = "save-btn";
-            button.onclick = function () { saveBranch(this); };
-        }
-
-        // 儲存分店功能
-        function saveBranch(button) {
-            const row = button.parentElement.parentElement;
-            const cells = row.getElementsByTagName("td");
-
-            for (let i = 0; i < cells.length - 1; i++) {
-                if (i < 4) {
-                    const input = cells[i].getElementsByTagName("input")[0];
-                    cells[i].textContent = input.value;
-                } else if (i === 4) {
-                    const select = cells[i].getElementsByTagName("select")[0];
-                    cells[i].textContent = select.value === "user" ? "使用者" : "管理員";
-                }
-            }
-
-            // 更改按鈕為編輯
-            button.textContent = "編輯";
-            button.className = "edit-btn";
-            button.onclick = function () { editBranch(this); };
-        }
+        function addBranch() { /* 添加分店資料的函數 */ }
     </script>
 </body>
 </html>
