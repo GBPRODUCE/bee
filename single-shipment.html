@@ -3,68 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>單次寄件明細表</title>
+    <title>行政系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
+            height: 100vh;
+            overflow: hidden; /* 防止頁面本身滾動 */
         }
-        h2 {
+
+        header {
+            background-color: #333;
+            color: #fff;
             text-align: center;
-            color: #333;
-            font-size: 24px;
+            padding: 10px 0;
         }
-        p {
-            text-align: center;
-            font-size: 16px;
+
+        h1 {
             margin: 0;
-            color: #666;
+            font-size: 2em;
         }
+
         .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            display: flex;
+            height: calc(100vh - 50px); /* 減去 header 的高度 */
         }
+
+        .sidebar {
+            width: 11%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 0;
+            margin: 10px 0;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .main-content {
+            flex: 1;
+            height: 90%;
+            overflow-y: auto; /* 設置垂直滾動條 */
+            padding: 20px;
+            padding-bottom: 50px; /* 增加底部內邊距以防止內容被遮擋 */
+            background: #f8f9fa;
+        }
+
+        /* 表格樣式 */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #2E8B57;
-            color: white;
-            font-weight: bold;
             text-align: center;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+
+        th {
+            background-color: #007bff;
+            color: #fff;
         }
-        tr:hover {
-            background-color: #f1f1f1;
+
+        /* 設定每列的寬度 */
+        table th:nth-child(1) {
+            width: 20%;
         }
-        .signature {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 20px;
-            color: #666;
-            font-style: italic;
+        table th:nth-child(2) {
+            width: 40%;
         }
-        .signature label {
-            margin-right: 10px;
+        table th:nth-child(3) {
+            width: 20%;
         }
+        table th:nth-child(4) {
+            width: 20%;
+        }
+
+        /* 調整輸入框樣式 */
         input[type="text"], input[type="date"] {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -72,179 +105,166 @@
             font-size: 14px;
             background-color: #f9f9f9;
         }
-        input[type="text"]:focus, input[type="date"]:focus {
-            border-color: #4CAF50;
-            background-color: #fff;
-            outline: none;
+
+        /* 提交按鈕樣式 */
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
         }
-        .signature input[type="text"] {
-            width: 250px; /* 控制寄件人輸入框的寬度 */
-            margin-left: 5px;
+
+        button:hover {
+            background-color: #0056b3;
         }
-        /* 使黑貓單號和輸入框同列且置中 */
+
+        .signature {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
         .trackingNumberContainer {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
         }
+
         .trackingNumberContainer label {
             margin-right: 10px;
-        }
-        .trackingNumberContainer input {
-            width: 250px;
-        }
-        /* 調整表格列寬 */
-        table th, table td {
-            width: auto;
-        }
-        table th:nth-child(1) {
-            width: 25%;
-        }
-        table th:nth-child(2) {
-            width: 45%;
-        }
-        table th:nth-child(3) {
-            width: 15%;
-        }
-        table th:nth-child(4) {
-            width: 15%;
-        }
-                /* 返回首頁按鈕的樣式 */
-        .back-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- 返回首頁按鈕 -->
-    <button class="back-button" onclick="window.location.href='index.html'">返回首頁</button>
-</div>
-<div class="container">
-    <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
+    <header>
+        <h1>行政系統</h1>
+    </header>
 
-    <!-- 黑貓單號輸入欄位，置中顯示 -->
-    <div class="trackingNumberContainer">
-        <label for="barcodeInput">黑貓單號:</label>
-        <input type="text" id="barcodeInput" oninput="updateBarcode()" title="12碼阿拉伯數字；Ex:120355030991">
+    <div class="container">
+        <!-- 左側選單 Sidebar Menu -->
+        <div class="sidebar">
+            <a href="single-shipment.html">黑貓寄件明細表</a>
+            <a href="monthly-summary.html">黑貓月末總明細</a>
+            <a href="admin-login.html">管理者後台系統</a>
+            <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
+            <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+        </div>
+
+        <!-- 主體內容區塊 Main Content -->
+        <div class="main-content">
+            <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
+
+            <!-- 黑貓單號輸入欄位，置中顯示 -->
+            <div class="trackingNumberContainer">
+                <label for="barcodeInput">黑貓單號:</label>
+                <input type="text" id="barcodeInput" oninput="updateBarcode()" title="12碼阿拉伯數字；Ex:120355030991">
+            </div>
+            <!-- 條碼展示 -->
+            <div id="barcode" class="trackingNumberContainer">
+                <svg></svg>
+            </div>
+
+            <!-- JavaScript 代码 -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
+            <script>
+                // 更新條碼
+                function updateBarcode() {
+                    // 获取输入的条码值
+                    var barcodeValue = document.getElementById("barcodeInput").value;
+                    // 生成條碼
+                    JsBarcode("#barcode svg", barcodeValue, {
+                        format: "CODE128",
+                        displayValue: true
+                    });
+                }
+
+                // 初始生成條碼
+                updateBarcode();
+            </script>
+
+            <table>
+                <tr>
+                    <th>寄件日期</th>
+                    <td><input type="date" id="shippingDate" name="shippingDate"></td>
+                    <th>收件人</th>
+                    <td><input type="text" id="receiver" name="receiver" title="EX:元健大和"></td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>品名</th>
+                    <th>備註(姓名/發票號碼)</th>
+                    <th>收件者</th>
+                    <th>簽收</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item1" title="輸入品名"></td>
+                    <td><input type="text" name="remark1" title="輸入備註(姓名/發票號碼)"></td>
+                    <td><input type="text" name="recipient1" title="輸入收件者"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item2"></td>
+                    <td><input type="text" name="remark2"></td>
+                    <td><input type="text" name="recipient2"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item3"></td>
+                    <td><input type="text" name="remark3"></td>
+                    <td><input type="text" name="recipient3"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item4"></td>
+                    <td><input type="text" name="remark4"></td>
+                    <td><input type="text" name="recipient4"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item5"></td>
+                    <td><input type="text" name="remark5"></td>
+                    <td><input type="text" name="recipient5"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item6"></td>
+                    <td><input type="text" name="remark6"></td>
+                    <td><input type="text" name="recipient6"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item7"></td>
+                    <td><input type="text" name="remark7"></td>
+                    <td><input type="text" name="recipient7"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item8"></td>
+                    <td><input type="text" name="remark8"></td>
+                    <td><input type="text" name="recipient8"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item9"></td>
+                    <td><input type="text" name="remark9"></td>
+                    <td><input type="text" name="recipient9"></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <!-- 寄件人輸入欄位 -->
+            <div class="signature">
+                <label for="sender">寄件人:</label>
+                <input type="text" id="sender" name="sender" title="EX:華小璋">
+            </div>
+        </div>
     </div>
-    <!-- 條碼展示 -->
-    <div id="barcode" class="trackingNumberContainer">
-        <svg></svg>
-    </div>
-
-    <!-- JavaScript 代码 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
-    <script>
-        // 更新條碼
-        function updateBarcode() {
-            // 获取输入的条码值
-            var barcodeValue = document.getElementById("barcodeInput").value;
-            // 生成條碼
-            JsBarcode("#barcode svg", barcodeValue, {
-                format: "CODE128",
-                displayValue: true
-            });
-        }
-
-        // 初始生成條碼
-        updateBarcode();
-    </script>
-
-    <table>
-        <tr>
-            <!-- 寄件日期輸入欄位 -->
-            <th>寄件日期</th>
-            <td><input type="date" id="shippingDate" name="shippingDate"></td>
-            <!-- 托運單收件人輸入欄位 -->
-            <th>收件人</th>
-            <td><input type="text" id="receiver" name="receiver" title="EX:元健大和"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <th>品名</th>
-            <th>備註(姓名/發票號碼)</th>
-            <th>收件者</th>
-            <th>簽收</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="item1" title="輸入品名"></td>
-            <td><input type="text" name="remark1" title="輸入備註(姓名/發票號碼)"></td>
-            <td><input type="text" name="recipient1" title="輸入收件者"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item2"></td>
-            <td><input type="text" name="remark2"></td>
-            <td><input type="text" name="recipient2"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item3"></td>
-            <td><input type="text" name="remark3"></td>
-            <td><input type="text" name="recipient3"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item4"></td>
-            <td><input type="text" name="remark4"></td>
-            <td><input type="text" name="recipient4"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item5"></td>
-            <td><input type="text" name="remark5"></td>
-            <td><input type="text" name="recipient5"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item6"></td>
-            <td><input type="text" name="remark6"></td>
-            <td><input type="text" name="recipient6"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item7"></td>
-            <td><input type="text" name="remark7"></td>
-            <td><input type="text" name="recipient7"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item8"></td>
-            <td><input type="text" name="remark8"></td>
-            <td><input type="text" name="recipient8"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="item9"></td>
-            <td><input type="text" name="remark9"></td>
-            <td><input type="text" name="recipient9"></td>
-            <td></td>
-        </tr>
-    </table>
-
-    <!-- 寄件人輸入欄位 -->
-    <div class="signature">
-        <label for="sender">寄件人:</label>
-        <input type="text" id="sender" name="sender" title="EX:華小璋">
-    </div>
-</div>
-
 </body>
 </html>
