@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首頁</title>
+    <title>行政系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            text-align: center;
+            margin: 0;
         }
         header {
             background-color: #333;
             color: #fff;
+            text-align: center;
             padding: 10px 0;
         }
         h1 {
@@ -21,63 +22,153 @@
         }
         .container {
             display: flex;
+            height: 90vh;
+        }
+        .sidebar {
+            width: 11%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 10px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 0;
+            margin: 10px 0;
+            display: block;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 80vh;
+            background: #f8f9fa;
         }
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px;
-            text-decoration: none;
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
             color: #333;
-            transition: transform 0.3s;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        .form-group {
+            margin-bottom: 15px;
         }
-        .card h2 {
-            margin-top: 0;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>首頁</h1>
+        <h1>行政系統</h1>
     </header>
 
     <div class="container">
-        <a href="branch-login.html" class="card">
-            <h2>使用者登入</h2>
-            <p>登入並進行使用</p>
-        </a>
-        <a href="single-shipment.html" class="card">
-            <h2>寄件明細表</h2>
-            <p>建立資料並列印</p>
-        </a>
-        <a href="monthly-summary.html" class="card">
-            <h2>月末總明細</h2>
-            <p>查看總表並列印</p>
-        </a>
-        <a href="admin-login.html" class="card">
-            <h2>管理者後台</h2>
-            <p>後台管理者系統</p>
-        </a>
-        <a href="https://neko.t-cat.com.tw/webchat/index.html" class="card">
-            <h2>黑貓文字客服</h2>
-            <p>預約黑貓收件</p>
-        </a>
-        <a href="https://icfws.sfaa.gov.tw/login.jsp" class="card">
-            <h2>身障補助請款系統</h2>
-            <p>登入進行代償墊付作業</p>
-        </a>
-        <a href="https://gbproduce.github.io/Hearing-aid-warranty/" class="card">
-            <h2>智能保固書</h2>
-            <p>生成智能保固書</p>
-        </a>
+        <!-- 左側選單 Sidebar Menu -->
+        <div class="sidebar">
+            <a href="single-shipment.html">黑貓寄件明細表</a>
+            <a href="monthly-summary.html">黑貓月末總明細</a>
+            <a href="admin-login.html">管理者後台系統</a>
+            <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
+            <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+        </div>
+
+        <!-- 主體內容區塊 Main Content -->
+        <div class="main-content">
+            <div class="login-container">
+                <h2>分店登入</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="account-id">帳號 (統一編號)</label>
+                        <input type="text" id="account-id" name="account-id" placeholder="請輸入統一編號" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密碼 (電話號碼)</label>
+                        <input type="password" id="password" name="password" placeholder="請輸入電話號碼" required>
+                    </div>
+                    <div class="error-message" id="error-message"></div>
+                    <button type="button" onclick="login()">登入</button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // 分店資料範例
+        const branches = [
+            { id: '12345678', phone: '0987654321', role: '使用者' },
+            { id: '87654321', phone: '0912345678', role: '管理者' }
+        ];
+
+        // 登入檢查函數
+        function login() {
+            const accountId = document.getElementById("account-id").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("error-message");
+
+            // 檢查分店資料
+            const branch = branches.find(b => b.id === accountId && b.phone === password);
+
+            if (branch) {
+                alert("登入成功！");
+                // 根據使用者角色導向不同頁面
+                if (branch.role === "管理者") {
+                    window.location.href = "index.html"; // 管理者導向首頁
+                } else {
+                    window.location.href = "index.html"; // 使用者導向首頁
+                }
+            } else {
+                errorMessage.textContent = "帳號或密碼錯誤，請重新輸入。";
+            }
+        }
+    </script>
 </body>
 </html>
