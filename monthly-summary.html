@@ -3,114 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>月末黑貓明細總表</title>
+    <title>行政系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
+            height: 100vh;
+            overflow: hidden; /* 防止頁面本身滾動 */
         }
-        h2 {
+
+        header {
+            background-color: #333;
+            color: #fff;
             text-align: center;
-            color: #333;
-            font-size: 24px;
+            padding: 5px 0;
         }
-        p {
-            text-align: center;
-            font-size: 16px;
+
+        h1 {
             margin: 0;
-            color: #666;
+            font-size: 2em;
         }
+
         .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            display: flex;
+            height: calc(100vh - 50px); /* 減去 header 的高度 */
         }
+
+        .sidebar {
+            width: 10%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 5px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: auto;
+            margin: auto;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .main-content {
+            flex: 1;
+            height: 90%;
+            overflow-y: auto; /* 設置垂直滾動條 */
+            padding: 20px;
+            padding-bottom: 50px; /* 增加底部內邊距以防止內容被遮擋 */
+            background:#FFFFFF;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        /* 表格樣式 */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 50px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #2E8B57;
-            color: white;
-            font-weight: bold;
             text-align: center;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .signature {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 20px;
-            color: #666;
-            font-style: italic;
-        }
-        .signature label {
-            margin-right: 10px;
-        }
-        input[type="text"], input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-        input[type="text"]:focus, input[type="date"]:focus {
-            border-color: #4CAF50;
-            background-color: #fff;
-            outline: none;
-        }
-        .centered-checkbox {
-            text-align: center;
-            vertical-align: middle;
         }
 
-        .signature input[type="text"] {
-            width: 250px; /* 控制寄件人輸入框的寬度 */
-            margin-left: 5px;
+        th {
+            background-color:#D2E9FF;
+            color:#000000;
         }
-        /* 使黑貓單號和輸入框同列且置中 */
-        .trackingNumberContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .trackingNumberContainer label {
-            margin-right: 10px;
-        }
-        .trackingNumberContainer input {
-            width: 250px;
-        }
-        /* 調整表格列寬 */
-        table th, table td {
-            width: auto;
-        }
+
+        /* 設定每列的寬度 */
         table th:nth-child(1) {
             width: 1%;
         }
         table th:nth-child(2) {
-            width: 19%;
+            width: 20%;
         }
         table th:nth-child(3) {
-            width: 13%;
+            width: 12%;
         }
         table th:nth-child(4) {
             width: 35%;
@@ -121,33 +102,89 @@
         table th:nth-child(6) {
             width: 1%;
         }
-                /* 返回首頁按鈕的樣式 */
-        .back-button {
-            display: block;
+
+        /* 調整輸入框樣式 */
+        input[type="text"], input[type="date"] {
             width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
+            padding:10px;
+            box-sizing: border-box;
+            border:none;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #FFFFFF;
         }
-        .back-button:hover {
-            background-color: #0056b3;
+
+        /* QR Code 樣式 */
+        .qrCode {
+            width: 50px;
+            height: 50px;
+            border:none;
+            margin:auto;
+            display: none; /* 初始狀態隱藏 */
+        }
+
+        /* 列印按鈕樣式 */
+        .print-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .print-button {
+            padding: 10px 20px;
+            background-color:#D2E9FF;
+            color:#000000;
+            border: none;
+            border-radius:5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .print-button:hover {
+            background-color:#0056b3;
+        }
+
+        /* 列印樣式設定 */
+        @media print {
+            body * {
+                visibility: hidden; /* 隱藏整個頁面內容 */
+            }
+            .main-content, .main-content * {
+                visibility: visible; /* 只顯示 main-content 區域 */
+            }
+            .main-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+                padding: 0;
+                margin: 0;
+            }
+            .print-button-container {
+                display: none; /* 列印時隱藏列印按鈕 */
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- 返回首頁按鈕 -->
-    <button class="back-button" onclick="window.location.href='index.html'">返回首頁</button>
-</div>
-<div class="container">
-    <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
+    <header>
+        <h1>行政系統</h1>
+    </header>
+    <div class="container">
+        <!-- 左側選單 Sidebar Menu -->
+        <div class="sidebar">
+            <a href="single-shipment.html">黑貓寄件明細表</a>
+            <a href="monthly-summary.html">黑貓月末總明細</a>
+            <a href="admin-login.html">管理者後台系統</a>
+            <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
+            <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+        </div>
 
+        <!-- 主體內容區塊 Main Content -->
+        <div class="main-content" id="main-content">
+            <h2>元健大和直販事業股份有限公司<br>雲林斗六門市 黑貓寄件明細表</h2>
     <table>
         <tr>
             <th>序</th>
@@ -155,7 +192,7 @@
             <th>收件人</th>
             <th>收件地址</th>
             <th>內容物</th>
-            <th>總公司</th>
+            <th>註</th>
         </tr>
         <tr>
             <td>1</td>
@@ -238,8 +275,41 @@
             <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
         </tr>
     </table>
+<p>備註:如為總公司要求寄件，請於最後一欄打勾</p>
 
-</div>
+            <!-- 列印按鈕區域 -->
+            <div class="print-button-container">
+                <button class="print-button" onclick="printContent()">列印</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- JavaScript 代码 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+        // 生成 QR Code
+        var qr = new QRious({
+            element: document.getElementById("qrCode"),
+            size: 100, // QR Code 大小
+            value: ""  // 初始值為空
+        });
+
+        // 更新 QR Code 並控制顯示狀態
+        function updateQRCode() {
+            var barcodeValue = document.getElementById("barcodeInput").value;
+            var qrCodeElement = document.getElementById("qrCode");
+            
+            if (barcodeValue.trim() !== "") {
+                qr.set({ value: barcodeValue });
+                qrCodeElement.style.display = "block"; // 顯示 QR Code
+            } else {
+                qrCodeElement.style.display = "none"; // 隱藏 QR Code
+            }
+        }
+        // 列印指定內容
+        function printContent() {
+            window.print();
+        }
+    </script>
 </body>
 </html>
