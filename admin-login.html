@@ -211,11 +211,11 @@
         <!-- 主體內容區塊 Main Content -->
         <div class="main-content">
             <div class="container-content">
-                <!-- 新增分店表單 -->
-                <h2>新增分店資訊</h2>
+                <!-- 新增門市表單 -->
+                <h2>新增門市資訊</h2>
                 <form id="add-branch-form">
                     <div class="form-group">
-                        <label for="branch-name">分店名稱</label>
+                        <label for="branch-name">門市名稱</label>
                         <input type="text" id="branch-name" name="branch-name" required>
                     </div>
                     <div class="form-group">
@@ -223,7 +223,7 @@
                         <input type="text" id="branch-id" name="branch-id" required>
                     </div>
                     <div class="form-group">
-                        <label for="branch-address">地址</label>
+                        <label for="branch-address">營業地址</label>
                         <input type="text" id="branch-address" name="branch-address" required>
                     </div>
                     <div class="form-group">
@@ -237,20 +237,20 @@
                             <option value="admin">管理員</option>
                         </select>
                     </div>
-                    <button type="button" onclick="addBranch()">新增分店</button>
+                    <button type="button" onclick="addBranch()">新增門市</button>
                 </form>
 
-                <!-- 分店資訊表格 -->
-                <h2>分店資訊列表</h2>
+                <!-- 門市資訊表格 -->
+                <h2>門市資訊列表</h2>
                 <table id="branch-table">
                     <thead>
                         <tr>
-                            <th>分店名稱</th>
+                            <th>門市名稱</th>
                             <th>統一編號 (帳號)</th>
-                            <th>地址</th>
+                            <th>營業地址</th>
                             <th>電話號碼 (密碼)</th>
                             <th>使用權限</th>
-                            <th>操作</th>
+                            <th>操作權限</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -283,7 +283,7 @@
     </div>
 
     <script>
-        function addBranch() { /* 添加分店資料的函數 */ }
+        function addBranch() { /* 添加門市資料的函數 */ }
     </script>
 </body>
 </html>
