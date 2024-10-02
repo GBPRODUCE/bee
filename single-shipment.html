@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #FFFFFF;
             margin: 0;
             height: 100vh;
             overflow: hidden; /* 防止頁面本身滾動 */
@@ -17,7 +17,7 @@
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 5px 0;
         }
 
         h1 {
@@ -31,10 +31,10 @@
         }
 
         .sidebar {
-            width: 11%;
+            width: 10%;
             background-color: #333;
             color: #fff;
-            padding: 20px 10px;
+            padding: 10px 5px;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -44,14 +44,10 @@
         .sidebar a {
             text-decoration: none;
             color: #fff;
-            padding: 10px 0;
-            margin: 10px 0;
+            padding: auto;
+            margin: auto;
             display: block;
             transition: background 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #444;
         }
 
         .main-content {
@@ -60,7 +56,7 @@
             overflow-y: auto; /* 設置垂直滾動條 */
             padding: 20px;
             padding-bottom: 50px; /* 增加底部內邊距以防止內容被遮擋 */
-            background: #f8f9fa;
+            background:#FFFFFF;
         }
 
         h2 {
@@ -83,8 +79,8 @@
         }
 
         th {
-            background-color: #007bff;
-            color: #fff;
+            background-color:#D2E9FF;
+            color:#000000;
         }
 
         /* 設定每列的寬度 */
@@ -103,45 +99,65 @@
 
         /* 調整輸入框樣式 */
         input[type="text"], input[type="date"] {
-            width: 90%;
+            width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
+            border:none;
             border-radius: 4px;
             font-size: 14px;
-            background-color: #f9f9f9;
+            background-color: #FFFFFF;
         }
 
-        /* 提交按鈕樣式 */
-        button {
-            padding: 10px 15px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
+        /* QR Code 樣式 */
+        .qrCode {
+            width: 50px;
+            height: 50px;
+            border:none;
+            margin:auto;
+            display: none; /* 初始狀態隱藏 */
         }
 
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .signature {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .trackingNumberContainer {
+        /* 列印按鈕樣式 */
+        .print-button-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
-        .trackingNumberContainer label {
-            margin-right: 10px;
+        .print-button {
+            padding: 10px 20px;
+            background-color:#D2E9FF;
+            color:#000000;
+            border: none;
+            border-radius:5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .print-button:hover {
+            background-color:#0056b3;
+        }
+
+        /* 列印樣式設定 */
+        @media print {
+            body * {
+                visibility: hidden; /* 隱藏整個頁面內容 */
+            }
+            .main-content, .main-content * {
+                visibility: visible; /* 只顯示 main-content 區域 */
+            }
+            .main-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+                padding: 0;
+                margin: 0;
+            }
+            .print-button-container {
+                display: none; /* 列印時隱藏列印按鈕 */
+            }
         }
     </style>
 </head>
@@ -149,7 +165,6 @@
     <header>
         <h1>行政系統</h1>
     </header>
-
     <div class="container">
         <!-- 左側選單 Sidebar Menu -->
         <div class="sidebar">
@@ -162,36 +177,20 @@
         </div>
 
         <!-- 主體內容區塊 Main Content -->
-        <div class="main-content">
-            <h2>元健大和直販事業股份有限公司<br>雲林斗六店 黑貓寄件明細表</h2>
+        <div class="main-content" id="main-content">
+            <h2>元健大和直販事業股份有限公司<br>雲林斗六門市 黑貓寄件明細表</h2>
 
-            <!-- 黑貓單號輸入欄位，置中顯示 -->
-            <div class="trackingNumberContainer">
-                <label for="barcodeInput">黑貓單號:</label>
-                <input type="text" id="barcodeInput" oninput="updateBarcode()" title="12碼阿拉伯數字；Ex:120355030991">
-            </div>
-            <!-- 條碼展示 -->
-            <div id="barcode" class="trackingNumberContainer">
-                <svg></svg>
-            </div>
+            <!-- 黑貓單號輸入欄位，左右並列顯示 -->
 
-            <!-- JavaScript 代码 -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
-            <script>
-                // 更新條碼
-                function updateBarcode() {
-                    // 获取输入的条码值
-                    var barcodeValue = document.getElementById("barcodeInput").value;
-                    // 生成條碼
-                    JsBarcode("#barcode svg", barcodeValue, {
-                        format: "CODE128",
-                        displayValue: true
-                    });
-                }
+            <table>
+                <tr>
+                   <th><label for="barcodeInput">黑貓單號:</label></th>
+                   <td><input type="text" id="barcodeInput" class="small-input" oninput="updateQRCode()" title="12碼阿拉伯數字；Ex:120355030991"></td>
+                <!-- QR Code 顯示區 -->
+                   <td><canvas id="qrCode" class="qrCode"></canvas></td>
+                </tr>
+            </table>
 
-                // 初始生成條碼
-                updateBarcode();
-            </script>
 
             <table>
                 <tr>
@@ -266,11 +265,46 @@
             </table>
 
             <!-- 寄件人輸入欄位 -->
-            <div class="signature">
-                <label for="sender">寄件人:</label>
-                <input type="text" id="sender" name="sender" title="EX:華小璋">
+            <table>
+                <tr>
+                   <th>寄件人:</th>
+                   <td><input type="text" id="sender" name="sender" title="EX:華小璋"></td>
+                </tr>
+            </table>
+
+            <!-- 列印按鈕區域 -->
+            <div class="print-button-container">
+                <button class="print-button" onclick="printContent()">列印</button>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript 代码 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+        // 生成 QR Code
+        var qr = new QRious({
+            element: document.getElementById("qrCode"),
+            size: 100, // QR Code 大小
+            value: ""  // 初始值為空
+        });
+
+        // 更新 QR Code 並控制顯示狀態
+        function updateQRCode() {
+            var barcodeValue = document.getElementById("barcodeInput").value;
+            var qrCodeElement = document.getElementById("qrCode");
+            
+            if (barcodeValue.trim() !== "") {
+                qr.set({ value: barcodeValue });
+                qrCodeElement.style.display = "block"; // 顯示 QR Code
+            } else {
+                qrCodeElement.style.display = "none"; // 隱藏 QR Code
+            }
+        }
+        // 列印指定內容
+        function printContent() {
+            window.print();
+        }
+    </script>
 </body>
 </html>
