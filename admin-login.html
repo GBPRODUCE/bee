@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color:#FFFFFF;
             margin: 0;
             height: 100vh;
             overflow: hidden; /* 防止頁面本身滾動 */
@@ -17,7 +17,7 @@
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding:10px 0;
+            padding:5px 0;
         }
 
         h1 {
@@ -31,10 +31,10 @@
         }
 
         .sidebar {
-            width: 11%;
+            width: 10%;
             background-color: #333;
             color: #fff;
-            padding: 20px 10px;
+            padding: 10px 5px;
             box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -44,14 +44,10 @@
         .sidebar a {
             text-decoration: none;
             color: #fff;
-            padding: 10px 0;
-            margin: 10px 0;
+            padding:auto;
+            margin:auto;
             display: block;
             transition: background 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #444;
         }
 
         .main-content {
@@ -59,10 +55,15 @@
             height: 90%;
             overflow-y: auto; /* 設置垂直滾動條 */
             padding: 20px;
-            padding-bottom: 100px; /* 增加底部內邊距以防止內容被遮擋 */
-            background: #f8f9fa;
+            padding-bottom:50px; /* 增加底部內邊距以防止內容被遮擋 */
+            background:#FFFFFF;
         }
-
+        
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            text-align: center;
+        }
         .login-container, .container-content {
             width: 90%;
             margin: auto;
