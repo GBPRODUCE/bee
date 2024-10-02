@@ -147,26 +147,28 @@
         ];
 
         // 登入檢查函數
-        function login() {
-            const accountId = document.getElementById("account-id").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const errorMessage = document.getElementById("error-message");
+function login() {
+    const accountId = document.getElementById("account-id").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMessage = document.getElementById("error-message");
 
-            // 檢查分店資料
-            const branch = branches.find(b => b.id === accountId && b.phone === password);
+    // Check branch data
+    const branch = branches.find(b => b.id === accountId && b.phone === password);
 
-            if (branch) {
-                alert("登入成功！");
-                // 根據使用者角色導向不同頁面
-                if (branch.role === "管理者") {
-                    window.location.href = "admin-login.html"; // 管理者導向首頁
-                } else {
-                    window.location.href = "index.html"; // 使用者導向首頁
-                }
-            } else {
-                errorMessage.textContent = "帳號或密碼錯誤，請重新輸入。";
-            }
+    if (branch) {
+        alert("登入成功！");
+        // Store role in sessionStorage
+        sessionStorage.setItem("userRole", branch.role);
+        // Redirect based on user role
+        if (branch.role === "管理者") {
+            window.location.href = "admin-login.html"; // Admin redirect
+        } else {
+            window.location.href = "index.html"; // User redirect
         }
+    } else {
+        errorMessage.textContent = "帳號或密碼錯誤，請重新輸入。";
+    }
+}
     </script>
 </body>
 </html>
