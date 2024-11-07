@@ -129,53 +129,9 @@
         <!-- 主體內容區塊 Main Content -->
         <div class="main-content">
             <div class="login-container">
-                <h2>門市登入</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="account-id">帳號 (統一編號)</label>
-                        <input type="text" id="account-id" name="account-id" placeholder="請輸入統一編號" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密碼 (電話號碼)</label>
-                        <input type="password" id="password" name="password" placeholder="請輸入電話號碼" required>
-                    </div>
-                    <div class="error-message" id="error-message"></div>
-                    <button type="button" onclick="login()">登入</button>
-                </form>
+                <h2>歡迎使用</h2>
             </div>
         </div>
     </div>
-
-    <script>
-        // 門市資料範例
-        const branches = [
-            { id: '12345678', phone: '0987654321', role: '使用者' },
-            { id: '12', phone: '057723181', role: '管理者' }
-        ];
-
-        // 登入檢查函數
-function login() {
-    const accountId = document.getElementById("account-id").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const errorMessage = document.getElementById("error-message");
-
-    // Check branch data
-    const branch = branches.find(b => b.id === accountId && b.phone === password);
-
-    if (branch) {
-        alert("登入成功！");
-        // Store role in sessionStorage
-        sessionStorage.setItem("userRole", branch.role);
-        // Redirect based on user role
-        if (branch.role === "管理者") {
-            window.location.href = "admin-login.html"; // Admin redirect
-        } else {
-            window.location.href = "index.html"; // User redirect
-        }
-    } else {
-        errorMessage.textContent = "帳號或密碼錯誤，請重新輸入。";
-    }
-}
-    </script>
 </body>
 </html>
