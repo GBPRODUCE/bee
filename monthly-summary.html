@@ -9,36 +9,42 @@
             font-family: Arial, sans-serif;
             background-color: #FFFFFF;
             margin: 0;
-            height: 100vh;
-            overflow: hidden; /* 防止頁面本身滾動 */
+            padding: 0;
         }
-
         header {
             background-color: #333;
             color: #fff;
             text-align: center;
             padding: 5px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: left 0.3s ease; /* 與側邊菜單一起移動 */
         }
-        a{ 
-            text-decoration:none;
+        header a {
+            text-decoration: none;
             color: #fff;
         }
-        a:hover{ 
-            text-decoration:underline;
+        header a:hover {
+            text-decoration: underline;
         }
-
         h1 {
             margin: 0;
             font-size: 2em;
         }
-
         .container {
             display: flex;
-            height: calc(100vh - 50px); /* 減去 header 的高度 */
+            height: 90vh;
+            margin-top: 50px; /* 為了避免header重疊內容 */
         }
-
         .sidebar {
-            width: 10%;
+            position: fixed;
+            top: 0;
+            left: -200px; /* 默認隱藏 */
+            width: 200px;
+            height: 100%; /* 讓菜單填滿視窗高度 */
             background-color: #333;
             color: #fff;
             padding: 10px 5px;
@@ -46,144 +52,132 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            transition: left 0.3s ease;
+            z-index: 999;
         }
-
         .sidebar a {
             text-decoration: none;
             color: #fff;
-            padding: auto;
-            margin: auto;
+            padding: 10px 20px;
+            margin: 5px 0;
             display: block;
             transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #555;
         }
 
         .main-content {
             flex: 1;
-            height: 90%;
-            overflow-y: auto; /* 設置垂直滾動條 */
-            padding: 20px;
-            padding-bottom: 50px; /* 增加底部內邊距以防止內容被遮擋 */
-            background:#FFFFFF;
-        }
-
-        h2 {
-            margin: 0;
-            font-size: 2em;
-            text-align: center;
-        }
-
-        /* 表格樣式 */
-        table {
-            table-layout: fixed;
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 50px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background-color:#D2E9FF;
-            color:#000000;
-        }
-
-        /* 設定每列的寬度 */
-        table th:nth-child(1) {
-            width: 1%;
-        }
-        table th:nth-child(2) {
-            width: 20%;
-        }
-        table th:nth-child(3) {
-            width: 12%;
-        }
-        table th:nth-child(4) {
-            width: 35%;
-        }
-        table th:nth-child(5) {
-            width: 31%;
-        }
-        table th:nth-child(6) {
-            width: 1%;
-        }
-
-        /* 調整輸入框樣式 */
-        input[type="text"], input[type="date"] {
-            width: 100%;
-            padding:10px;
-            box-sizing: border-box;
-            border:none;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #FFFFFF;
-        }
-
-        /* QR Code 樣式 */
-        .qrCode {
-            width: 50px;
-            height: 50px;
-            border:none;
-            margin:auto;
-            display: none; /* 初始狀態隱藏 */
-        }
-
-        /* 列印按鈕樣式 */
-        .print-button-container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
             margin-top: 10px;
         }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-        .print-button {
+        /* 懸浮按鈕 */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
             padding: 10px 20px;
-            background-color:#D2E9FF;
-            color:#000000;
-            border: none;
-            border-radius:5px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
+            z-index: 1001;
         }
-
-        .print-button:hover {
-            background-color:#0056b3;
+        .menu-toggle:hover {
+            background-color: #555;
         }
-
-        /* 列印樣式設定 */
-        @media print {
-            body * {
-                visibility: hidden; /* 隱藏整個頁面內容 */
-            }
-            .main-content, .main-content * {
-                visibility: visible; /* 只顯示 main-content 區域 */
-            }
-            .main-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: auto;
-                padding: 0;
-                margin: 0;
-            }
-            .print-button-container {
-                display: none; /* 列印時隱藏列印按鈕 */
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        /* 特定行背景色 */
+        .mid-level {
+            background-color: #FFE0B2; /* 淺橘色 */
+        }
+        .advanced-level {
+            background-color: #FFF9C4; /* 淺黃色 */
         }
     </style>
+
 </head>
+<header>
+
+</header>
 <body>
-    <header>
-        <h1><a href="index.html">行政系統</h1>
-    </header>
     <div class="container">
         <!-- 左側選單 Sidebar Menu -->
         <div class="sidebar">
-            <a href="single-shipment.html">黑貓寄件明細表</a>
-            <a href="monthly-summary.html">黑貓月末總明細</a>
+            <a></a>
+            <a></a>
+            <a href="single-shipment.html">補助功能表查詢</a>
+            <a href="monthly-summary.html">黑貓文字客服網</a>
             <a href="admin-login.html">管理者後台系統</a>
             <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
             <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
@@ -191,132 +185,31 @@
         </div>
 
         <!-- 主體內容區塊 Main Content -->
-        <div class="main-content" id="main-content">
-            <h2>元健大和直販事業股份有限公司<br>雲林斗六門市 黑貓寄件明細表</h2>
-    <table>
-        <tr>
-            <th>序</th>
-            <th>黑貓單號</th>
-            <th>收件人</th>
-            <th>收件地址</th>
-            <th>內容物</th>
-            <th>註</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td><input type="text" name="blackcat1" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name1" title="輸入收件人"></td>
-            <td><input type="text" name="address1" title="輸入收件地址"></td>
-            <td><input type="text" name="box1" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td><input type="text" name="blackcat2" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name2" title="輸入收件人"></td>
-            <td><input type="text" name="address2" title="輸入收件地址"></td>
-            <td><input type="text" name="box2" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td><input type="text" name="blackcat3" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name3" title="輸入收件人"></td>
-            <td><input type="text" name="address3" title="輸入收件地址"></td>
-            <td><input type="text" name="box3" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td><input type="text" name="blackcat4" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name4" title="輸入收件人"></td>
-            <td><input type="text" name="address4" title="輸入收件地址"></td>
-            <td><input type="text" name="box4" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td><input type="text" name="blackcat5" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name5" title="輸入收件人"></td>
-            <td><input type="text" name="address5" title="輸入收件地址"></td>
-            <td><input type="text" name="box5" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td><input type="text" name="blackcat6" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name6" title="輸入收件人"></td>
-            <td><input type="text" name="address6" title="輸入收件地址"></td>
-            <td><input type="text" name="box6" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td><input type="text" name="blackcat7" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name7" title="輸入收件人"></td>
-            <td><input type="text" name="address7" title="輸入收件地址"></td>
-            <td><input type="text" name="box7" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td><input type="text" name="blackcat8" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name8" title="輸入收件人"></td>
-            <td><input type="text" name="address8" title="輸入收件地址"></td>
-            <td><input type="text" name="box8" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td><input type="text" name="blackcat9" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name9" title="輸入收件人"></td>
-            <td><input type="text" name="address9" title="輸入收件地址"></td>
-            <td><input type="text" name="box9" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td><input type="text" name="blackcat10" title="輸入12碼黑貓單號"></td>
-            <td><input type="text" name="name10" title="輸入收件人"></td>
-            <td><input type="text" name="address10" title="輸入收件地址"></td>
-            <td><input type="text" name="box10" title="輸入包裹內容物"></td>
-            <td class="centered-checkbox"><input type="checkbox" title="總公司要求即打勾"></td>
-        </tr>
-    </table>
-<p>備註:如為總公司要求寄件，請於最後一欄打勾</p>
 
-            <!-- 列印按鈕區域 -->
-            <div class="print-button-container">
-                <button class="print-button" onclick="printContent()">列印</button>
-            </div>
-        </div>
+    <div class="main-content">
+          <iframe src="https://neko.t-cat.com.tw/webchat/index.html" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <!-- JavaScript 代码 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script>
-        // 生成 QR Code
-        var qr = new QRious({
-            element: document.getElementById("qrCode"),
-            size: 100, // QR Code 大小
-            value: ""  // 初始值為空
-        });
+    <!-- 懸浮按鈕 -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-        // 更新 QR Code 並控制顯示狀態
-        function updateQRCode() {
-            var barcodeValue = document.getElementById("barcodeInput").value;
-            var qrCodeElement = document.getElementById("qrCode");
+    <script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const header = document.querySelector('header');
+            const mainContent = document.querySelector('.main-content');
             
-            if (barcodeValue.trim() !== "") {
-                qr.set({ value: barcodeValue });
-                qrCodeElement.style.display = "block"; // 顯示 QR Code
+            if (sidebar.style.left === '0px') {
+                // 隱藏側邊菜單
+                sidebar.style.left = '-200px';
+                header.style.left = '0';
+                mainContent.style.marginLeft = '0';
             } else {
-                qrCodeElement.style.display = "none"; // 隱藏 QR Code
+                // 顯示側邊菜單
+                sidebar.style.left = '0px';
+                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
+                mainContent.style.marginLeft = '200px';
             }
-        }
-        // 列印指定內容
-        function printContent() {
-            window.print();
         }
     </script>
 </body>
