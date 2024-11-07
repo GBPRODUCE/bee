@@ -7,38 +7,44 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color:#FFFFFF;
+            background-color: #FFFFFF;
             margin: 0;
-            height: 100vh;
-            overflow: hidden; /* 防止頁面本身滾動 */
+            padding: 0;
         }
-
         header {
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding:5px 0;
+            padding: 5px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: left 0.3s ease; /* 與側邊菜單一起移動 */
         }
-        a{ 
-            text-decoration:none;
+        header a {
+            text-decoration: none;
             color: #fff;
         }
-        a:hover{ 
-            text-decoration:underline;
+        header a:hover {
+            text-decoration: underline;
         }
-
         h1 {
             margin: 0;
             font-size: 2em;
         }
-
         .container {
             display: flex;
-            height: calc(100vh - 50px); /* 減去 header 的高度 */
+            height: 90vh;
+            margin-top: 50px; /* 為了避免header重疊內容 */
         }
-
         .sidebar {
-            width: 10%;
+            position: fixed;
+            top: 0;
+            left: -200px; /* 默認隱藏 */
+            width: 200px;
+            height: 100%; /* 讓菜單填滿視窗高度 */
             background-color: #333;
             color: #fff;
             padding: 10px 5px;
@@ -46,62 +52,51 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            transition: left 0.3s ease;
+            z-index: 999;
         }
-
         .sidebar a {
             text-decoration: none;
             color: #fff;
-            padding:auto;
-            margin:auto;
+            padding: 10px 20px;
+            margin: 5px 0;
             display: block;
             transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #555;
         }
 
         .main-content {
             flex: 1;
-            height: 90%;
-            overflow-y: auto; /* 設置垂直滾動條 */
-            padding: 20px;
-            padding-bottom:50px; /* 增加底部內邊距以防止內容被遮擋 */
-            background:#FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
         }
-        
-        h2 {
-            margin: 0;
-            font-size: 2em;
-            text-align: center;
-        }
-        .login-container, .container-content {
-            width: 90%;
-            margin: auto;
-        }
-
         .login-container {
             width: 400px;
             padding: 30px;
             background: #fff;
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px #aaa;
-            margin-top: 20px;
         }
-
         .login-container h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
         }
-
         .form-group {
             margin-bottom: 15px;
         }
-
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #333;
         }
-
         input {
             width: calc(100% - 20px);
             padding: 10px;
@@ -109,12 +104,10 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
         input:focus {
             border-color: #007bff;
             outline: none;
         }
-
         button {
             width: 100%;
             padding: 12px;
@@ -126,182 +119,96 @@
             cursor: pointer;
             margin-top: 10px;
         }
-
         button:hover {
             background: #0056b3;
         }
-
         .error-message {
             color: red;
             text-align: center;
             margin-bottom: 10px;
         }
 
-        /* 其他主要內容區域的樣式 */
+        /* 懸浮按鈕 */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle:hover {
+            background-color: #555;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
-        table, th, td {
+        th, td {
+            padding: 10px;
+            text-align: center;
             border: 1px solid #ddd;
         }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
         th {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .form-group {
-            margin: 10px 0;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            background-color: #007bff;
+            background-color: #4CAF50;
             color: white;
-            cursor: pointer;
-            border-radius: 4px;
         }
-
-        button:hover {
-            background-color: #0056b3;
+        /* 特定行背景色 */
+        .mid-level {
+            background-color: #FFE0B2; /* 淺橘色 */
         }
-
-        .delete-btn {
-            background-color: #dc3545;
-        }
-
-        .delete-btn:hover {
-            background-color: #c82333;
-        }
-
-        .save-btn {
-            background-color: #28a745;
-        }
-
-        .save-btn:hover {
-            background-color: #218838;
+        .advanced-level {
+            background-color: #FFF9C4; /* 淺黃色 */
         }
     </style>
-</head>
-<body>
-    <header>
-        <h1><a href="index.html">行政系統</h1>
-    </header>
 
+</head>
+<header>
+
+</header>
+<body>
     <div class="container">
         <!-- 左側選單 Sidebar Menu -->
         <div class="sidebar">
-            <a href="single-shipment.html">黑貓寄件明細表</a>
-            <a href="monthly-summary.html">黑貓月末總明細</a>
-            <a href="admin-login.html">管理者後台系統</a>
-            <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
-            <a href="https://icfws.sfaa.gov.tw/login.jsp">身障補助請款網</a>
+            <a></a>
+            <a></a>
+            <a href="single-shipment.html">補助功能表查詢</a>
+            <a href="monthly-summary.html">黑貓文字客服網</a>
             <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+            <a href="https://icfws.sfaa.gov.tw/login.jsp">代償墊付登入系統</a>
         </div>
 
         <!-- 主體內容區塊 Main Content -->
-        <div class="main-content">
-            <div class="container-content">
-                <!-- 新增門市表單 -->
-                <h2>新增門市資訊</h2>
-                <form id="add-branch-form">
-                    <div class="form-group">
-                        <label for="branch-name">門市名稱</label>
-                        <input type="text" id="branch-name" name="branch-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="branch-id">統一編號 (預設為帳號)</label>
-                        <input type="text" id="branch-id" name="branch-id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="branch-address">營業地址</label>
-                        <input type="text" id="branch-address" name="branch-address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="branch-phone">電話號碼 (預設為密碼)</label>
-                        <input type="tel" id="branch-phone" name="branch-phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="branch-permission">使用權限</label>
-                        <select id="branch-permission" name="branch-permission">
-                            <option value="user">使用者</option>
-                            <option value="admin">管理員</option>
-                        </select>
-                    </div>
-                    <button type="button" onclick="addBranch()">新增門市</button>
-                </form>
 
-                <!-- 門市資訊表格 -->
-                <h2>門市資訊列表</h2>
-                <table id="branch-table">
-                    <thead>
-                        <tr>
-                            <th>門市名稱</th>
-                            <th>統一編號 (帳號)</th>
-                            <th>營業地址</th>
-                            <th>電話號碼 (密碼)</th>
-                            <th>使用權限</th>
-                            <th>操作權限</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>後臺管理員</td>
-                            <td>12</td>
-                            <td>雲林縣</td>
-                            <td>057723181</td>
-                            <td>管理員</td>
-                            <td>
-                                <button class="edit-btn">編輯</button>
-                                <button class="delete-btn">刪除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>雲林斗六門市</td>
-                            <td>90778522</td>
-                            <td>雲林縣斗六市大學路三段245號</td>
-                            <td>055362300</td>
-                            <td>使用者</td>
-                            <td>
-                                <button class="edit-btn">編輯</button>
-                                <button class="delete-btn">刪除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>高雄分店</td>
-                            <td>87654321</td>
-                            <td>高雄市前鎮區</td>
-                            <td>07-87654321</td>
-                            <td>使用者</td>
-                            <td>
-                                <button class="edit-btn">編輯</button>
-                                <button class="delete-btn">刪除</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="main-content">
+          <iframe src="https://neko.t-cat.com.tw/webchat/index.html" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>
     </div>
 
+    <!-- 懸浮按鈕 -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
     <script>
-        function addBranch() { /* 添加門市資料的函數 */ }
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const header = document.querySelector('header');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebar.style.left === '0px') {
+                // 隱藏側邊菜單
+                sidebar.style.left = '-200px';
+                header.style.left = '0';
+                mainContent.style.marginLeft = '0';
+            } else {
+                // 顯示側邊菜單
+                sidebar.style.left = '0px';
+                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
+                mainContent.style.marginLeft = '200px';
+            }
+        }
     </script>
 </body>
 </html>
