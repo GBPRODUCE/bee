@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行政系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: left 0.3s ease; /* 與側邊菜單一起移動 */
+        }
+        header a {
+            text-decoration: none;
+            color: #fff;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            display: flex;
+            height: 90vh;
+            margin-top: 50px; /* 為了避免header重疊內容 */
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -200px; /* 默認隱藏 */
+            width: 200px;
+            height: 100%; /* 讓菜單填滿視窗高度 */
+            background-color: #333;
+            color: #fff;
+            padding: 10px 5px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px 0;
+            display: block;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* 懸浮按鈕 */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle:hover {
+            background-color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        /* 特定行背景色 */
+        .mid-level {
+            background-color: #FFE0B2; /* 淺橘色 */
+        }
+        .advanced-level {
+            background-color: #FFF9C4; /* 淺黃色 */
+        }
+    </style>
+
+</head>
+<header>
+
+</header>
+<body>
+    <div class="container">
+        <!-- 左側選單 Sidebar Menu -->
+        <div class="sidebar">
+            <a></a>
+            <a></a>
+            <a href="single-shipment.html">補助功能表查詢</a>
+            <a href="monthly-summary.html">黑貓文字客服網</a>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/">智能保固書系統</a>
+            <a href="admin-login.html">代償墊付登入系統</a>
+            <a href="repair.html">元健維修單</a>
+        </div>
+
+        <!-- 主體內容區塊 Main Content -->
+
+    <div class="main-content">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSecRMKKjnjX_UF4zjy_Rk3MizA5w_NoVHC3YE2XMvQf4f4HrQ/viewform" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- 懸浮按鈕 -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const header = document.querySelector('header');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebar.style.left === '0px') {
+                // 隱藏側邊菜單
+                sidebar.style.left = '-200px';
+                header.style.left = '0';
+                mainContent.style.marginLeft = '0';
+            } else {
+                // 顯示側邊菜單
+                sidebar.style.left = '0px';
+                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
+                mainContent.style.marginLeft = '200px';
+            }
+        }
+    </script>
+</body>
+</html>
