@@ -16,7 +16,7 @@
             color: #fff;
             text-align: center;
             padding: 5px 0;
-            position: fixed; /* 固定在頂部 */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -44,6 +44,7 @@
             top: 0;
             left: -200px; /* 默認隱藏 */
             width: 200px;
+            height: 100%; /* 讓菜單填滿視窗高度 */
             background-color: #333;
             color: #fff;
             padding: 10px 5px;
@@ -52,6 +53,7 @@
             flex-direction: column;
             justify-content: flex-start;
             transition: left 0.3s ease;
+            z-index: 999;
         }
         .sidebar a {
             text-decoration: none;
@@ -136,7 +138,7 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 1001; /* 確保懸浮按鈕顯示在上層 */
+            z-index: 1001;
         }
         .menu-toggle:hover {
             background-color: #555;
@@ -144,13 +146,11 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html">行政系統</a></h1>
-    </header>
-
     <div class="container">
         <!-- 左側選單 Sidebar Menu -->
         <div class="sidebar">
+            <a></a>
+            <a></a>
             <a href="single-shipment.html">黑貓寄件明細表</a>
             <a href="monthly-summary.html">黑貓月末總明細</a>
             <a href="admin-login.html">管理者後台系統</a>
@@ -168,21 +168,24 @@
     </div>
 
     <!-- 懸浮按鈕 -->
-    <div class="menu-toggle" onclick="toggleMenu()">☰ 顯示菜單</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
     <script>
         function toggleMenu() {
             const sidebar = document.querySelector('.sidebar');
             const header = document.querySelector('header');
             const mainContent = document.querySelector('.main-content');
+            
             if (sidebar.style.left === '0px') {
-                sidebar.style.left = '-200px';  // 隱藏菜單
-                header.style.left = '0'; // header回到原位
-                mainContent.style.marginLeft = '0';  // 主內容回到正常位置
+                // 隱藏側邊菜單
+                sidebar.style.left = '-200px';
+                header.style.left = '0';
+                mainContent.style.marginLeft = '0';
             } else {
-                sidebar.style.left = '0px';  // 顯示菜單
-                header.style.left = '200px'; // header移動
-                mainContent.style.marginLeft = '200px';  // 移動主內容
+                // 顯示側邊菜單
+                sidebar.style.left = '0px';
+                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
+                mainContent.style.marginLeft = '200px';
             }
         }
     </script>
