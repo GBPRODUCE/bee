@@ -9,36 +9,42 @@
             font-family: Arial, sans-serif;
             background-color: #FFFFFF;
             margin: 0;
-            height: 100vh;
-            overflow: hidden; /* 防止頁面本身滾動 */
+            padding: 0;
         }
-
         header {
             background-color: #333;
             color: #fff;
             text-align: center;
             padding: 5px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: left 0.3s ease; /* 與側邊菜單一起移動 */
         }
-        a{ 
-            text-decoration:none;
+        header a {
+            text-decoration: none;
             color: #fff;
         }
-        a:hover{ 
-            text-decoration:underline;
+        header a:hover {
+            text-decoration: underline;
         }
-
         h1 {
             margin: 0;
             font-size: 2em;
         }
-
         .container {
             display: flex;
-            height: calc(100vh - 50px); /* 減去 header 的高度 */
+            height: 90vh;
+            margin-top: 50px; /* 為了避免header重疊內容 */
         }
-
         .sidebar {
-            width: 10%;
+            position: fixed;
+            top: 0;
+            left: -200px; /* 默認隱藏 */
+            width: 200px;
+            height: 100%; /* 讓菜單填滿視窗高度 */
             background-color: #333;
             color: #fff;
             padding: 10px 5px;
@@ -46,137 +52,131 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            transition: left 0.3s ease;
+            z-index: 999;
         }
-
         .sidebar a {
             text-decoration: none;
             color: #fff;
-            padding: auto;
-            margin: auto;
+            padding: 10px 20px;
+            margin: 5px 0;
             display: block;
             transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #555;
         }
 
         .main-content {
             flex: 1;
-            height: 90%;
-            overflow-y: auto; /* 設置垂直滾動條 */
-            padding: 20px;
-            padding-bottom: 50px; /* 增加底部內邊距以防止內容被遮擋 */
-            background:#FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
         }
-
-        h2 {
-            margin: 0;
-            font-size: 2em;
+        .login-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+        }
+        .login-container h2 {
             text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
-        /* 表格樣式 */
+        /* 懸浮按鈕 */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle:hover {
+            background-color: #555;
+        }
         table {
-            table-layout: fixed;
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background-color:#D2E9FF;
-            color:#000000;
-        }
-
-        /* 設定每列的寬度 */
-        table th:nth-child(1) {
-            width: 20%;
-        }
-        table th:nth-child(2) {
-            width: 40%;
-        }
-        table th:nth-child(3) {
-            width: 20%;
-        }
-        table th:nth-child(4) {
-            width: 20%;
-        }
-
-        /* 調整輸入框樣式 */
-        input[type="text"], input[type="date"] {
-            width: 100%;
             padding: 10px;
-            box-sizing: border-box;
-            border:none;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #FFFFFF;
+            text-align: center;
+            border: 1px solid #ddd;
         }
-
-        /* QR Code 樣式 */
-        .qrCode {
-            width: 50px;
-            height: 50px;
-            border:none;
-            margin:auto;
-            display: none; /* 初始狀態隱藏 */
+        th {
+            background-color: #4CAF50;
+            color: white;
         }
-
-        /* 列印按鈕樣式 */
-        .print-button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
+        /* 特定行背景色 */
+        .mid-level {
+            background-color: #FFE0B2; /* 淺橘色 */
         }
-
-        .print-button {
-            padding: 10px 20px;
-            background-color:#D2E9FF;
-            color:#000000;
-            border: none;
-            border-radius:5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .print-button:hover {
-            background-color:#0056b3;
-        }
-
-        /* 列印樣式設定 */
-        @media print {
-            body * {
-                visibility: hidden; /* 隱藏整個頁面內容 */
-            }
-            .main-content, .main-content * {
-                visibility: visible; /* 只顯示 main-content 區域 */
-            }
-            .main-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: auto;
-                padding: 0;
-                margin: 0;
-            }
-            .print-button-container {
-                display: none; /* 列印時隱藏列印按鈕 */
-            }
+        .advanced-level {
+            background-color: #FFF9C4; /* 淺黃色 */
         }
     </style>
+
 </head>
+<header>
+    <h1>補助功能表查詢</h1>
+</header>
 <body>
-    <header>
-        <h1><a href="index.html">行政系統</h1>
-    </header>
     <div class="container">
         <!-- 左側選單 Sidebar Menu -->
         <div class="sidebar">
-            <a href="single-shipment.html">黑貓寄件明細表</a>
+            <a></a>
+            <a></a>
+            <a href="single-shipment.html">補助功能表查詢</a>
             <a href="monthly-summary.html">黑貓月末總明細</a>
             <a href="admin-login.html">管理者後台系統</a>
             <a href="https://neko.t-cat.com.tw/webchat/index.html">黑貓文字客服網</a>
@@ -185,133 +185,742 @@
         </div>
 
         <!-- 主體內容區塊 Main Content -->
-        <div class="main-content" id="main-content">
-            <h2>元健大和直販事業股份有限公司<br>雲林斗六門市 黑貓寄件明細表</h2>
 
-            <!-- 黑貓單號輸入欄位，左右並列顯示 -->
+    <table class="main-content">
+            <tr>
+                <th><label for="modelselect">助聽器型號:</label></th>
+                <th>
+                    <select id="modelselect">
+                        <option value="" disabled="" selected=""></option>
+                        <optgroup label="Rugged"> 
+                            <option value="BICORE B-LI M RUGGED 40 BLK/BLK-DB110BLKA">BICORE B-LI M RUGGED 40 BLK/BLK-DB110BLKA</option>
+                            <option value="BICORE B-LI M RUGGED 40 BG/BG-DB100BG38">BICORE B-LI M RUGGED 40 BG/BG-DB100BG38</option>
+                            <option value="BICORE B-LI M RUGGED 60 BLK/BLK-DB110BLKB">BICORE B-LI M RUGGED 60 BLK/BLK-DB110BLKB</option>
+                            <option value="BICORE B-LI M RUGGED 60 BG/BG-DB100BG39">BICORE B-LI M RUGGED 60 BG/BG-DB100BG39</option>
+                            <option value="BICORE B-LI M RUGGED 80 BLK/BLK-DB110BLKC">BICORE B-LI M RUGGED 80 BLK/BLK-DB110BLKC</option>
+                            <option value="BICORE B-LI M RUGGED 80 BG/BG-DB100BG40">BICORE B-LI M RUGGED 80 BG/BG-DB100BG40</option>
+                        <optgroup label="M-Core B-Li">
+                            <option value="REXTON M-Core B-LI-P 20 BG-DB100BG13">REXTON M-Core B-LI-P 20 BG-DB100BG13</option>
+                            <option value="REXTON M-Core B-LI-P 20 BLK-DB100BLK3">REXTON M-Core B-LI-P 20 BLK-DB100BLK3</option>
+                            <option value="REXTON M-Core B-LI-P 40 BG -DB100BG05">REXTON M-Core B-LI-P 40 BG -DB100BG05</option>
+                            <option value="REXTON M-Core B-LI-P 40 BLK-DB100BLK2">REXTON M-Core B-LI-P 40 BLK-DB100BLK2</option>
+                            <option value="REXTON M-Core B-LI-P 40 SLV-DB100SLV9">REXTON M-Core B-LI-P 40 SLV-DB100SLV9</option>
+                            <option value="REXTON M-Core B-LI-P 60 BG-DB100BG19">REXTON M-Core B-LI-P 60 BG-DB100BG19</option>
+                            <option value="REXTON M-Core B-LI-P 60 BLK-DB100BLK9">REXTON M-Core B-LI-P 60 BLK-DB100BLK9</option>
+                            <option value="REXTON M-Core B-LI-P 80 BG-DB100BG18">REXTON M-Core B-LI-P 80 BG-DB100BG18</option>
+                            <option value="REXTON M-Core B-LI-P 80 BLK-DB100BLK8">REXTON M-Core B-LI-P 80 BLK-DB100BLK8</option>
+                            <option value="REXTON M-Core B-LI-HP 20 BG-DB100BG14">REXTON M-Core B-LI-HP 20 BG-DB100BG14</option>
+                            <option value="REXTON M-Core B-LI-HP 20 BLK-DB100BLK4">REXTON M-Core B-LI-HP 20 BLK-DB100BLK4</option>
+                            <option value="REXTON M-Core B-LI-HP 40 BG-DB100BG15">REXTON M-Core B-LI-HP 40 BG-DB100BG15</option>
+                            <option value="REXTON M-Core B-LI-HP 40 BLK-DB100BLK5">REXTON M-Core B-LI-HP 40 BLK-DB100BLK5</option>
+                            <option value="REXTON M-Core B-LI-HP 60 BG-DB100BG17">REXTON M-Core B-LI-HP 60 BG-DB100BG17</option>
+                            <option value="REXTON M-Core B-LI-HP 60 BLK-DB100BLK7">REXTON M-Core B-LI-HP 60 BLK-DB100BLK7</option>
+                            <option value="REXTON M-Core B-LI-HP 80 BG-DB100BG16">REXTON M-Core B-LI-HP 80 BG-DB100BG16</option>
+                            <option value="REXTON M-Core B-LI-HP 80 BLK-DB100BLK6">REXTON M-Core B-LI-HP 80 BLK-DB100BLK6</option>
+                            <option value="REXTON M-Core B-LI-M 20 BG-DB100BG20">REXTON M-Core B-LI-M 20 BG-DB100BG20</option>
+                            <option value="HA M-CORE B-LI-M 20 BLK-DB100BLKS">HA M-CORE B-LI-M 20 BLK-DB100BLKS</option>
+                            <option value="HA M-CORE B-LI-M 40 BG-DB100BG27">HA M-CORE B-LI-M 40 BG-DB100BG27</option>
+                            <option value="HA M-CORE B-LI-M 40 BLK-DB100BLKT">HA M-CORE B-LI-M 40 BLK-DB100BLKT</option>
+                            <option value="HA M-CORE B-LI-M 60 BLK-DB110BLK6">HA M-CORE B-LI-M 60 BLK-DB110BLK6</option>
+                            <option value="HA M-CORE B-LI-M 80 BLK-DB100BLKU">HA M-CORE B-LI-M 80 BLK-DB100BLKU</option>
+                        <optgroup label="Bi-Core R-Li">
+                            <option value="BiCore R-Li T 20 BLK-DB100BLKV">BiCore R-Li T 20 BLK-DB100BLKV</option>
+                            <option value="BiCore R-Li T 20 BG-DB100BG28">BiCore R-Li T 20 BG-DB100BG28</option>
+                            <option value="BiCore R-Li T 40 BLK-DB100BLKW">BiCore R-Li T 40 BLK-DB100BLKW</option>
+                            <option value="BiCore R-Li T 40 BG-DB100BG29">BiCore R-Li T 40 BG-DB100BG29</option>
+                            <option value="BiCore R-Li T 60 BLK-DB100BLKX">BiCore R-Li T 60 BLK-DB100BLKX</option>
+                            <option value="BiCore R-Li T 60 BG-DB100BG30">BiCore R-Li T 60 BG-DB100BG30</option>
+                            <option value="BiCore R-Li T 80 BLK-DB100BLKY">BiCore R-Li T 80 BLK-DB100BLKY</option>
+                            <option value="BiCore R-Li T 80 BG-DB100BG31">BiCore R-Li T 80 BG-DB100BG31</option>
+                            <option value="BiCore SR 40 BLK BLKG-DB110BLK7">BiCore SR 40 BLK BLKG-DB110BLK7</option>
+                        <optgroup label="IX">
+                            <option value="S_ITE M-CORE IX-CIC 80 MOC TRD-DB100MOC1">S_ITE M-CORE IX-CIC 80 MOC TRD-DB100MOC1</option>
+                            <option value="S_ITE M-CORE IX-CIC 80 BLK TRD-DB100BLKM">S_ITE M-CORE IX-CIC 80 BLK TRD-DB100BLKM</option>
+                            <option value="S_ITE M-CORE IX-CIC 80 MOC TBL-DB100MOC2">S_ITE M-CORE IX-CIC 80 MOC TBL-DB100MOC2</option>
+                            <option value="S_ITE M-CORE IX-CIC 80 BLK TBL-DB100BLKN">S_ITE M-CORE IX-CIC 80 BLK TBL-DB100BLKN</option>
+                            <option value="S ITE M-CORE IX-CIC 60 MOC TRD-DB100MOC3">S ITE M-CORE IX-CIC 60 MOC TRD-DB100MOC3</option>
+                            <option value="S ITE M-CORE IX-CIC 60 BLK TRD-DB100BLKO">S ITE M-CORE IX-CIC 60 BLK TRD-DB100BLKO</option>
+                            <option value="S ITE M-CORE IX-CIC 60 MOC TBL-DB100MOC4">S ITE M-CORE IX-CIC 60 MOC TBL-DB100MOC4</option>
+                            <option value="S ITE M-CORE IX-CIC 60 BLK TBL-DB100BLKP">S ITE M-CORE IX-CIC 60 BLK TBL-DB100BLKP</option>
+                            <option value="S ITE M-CORE IX -CIC 40 MOC TRD-DB100MOC5">S ITE M-CORE IX -CIC 40 MOC TRD-DB100MOC5</option>
+                            <option value="S ITE M-CORE IX-CIC 40 BLK TRD-DB100BLKQ">S ITE M-CORE IX-CIC 40 BLK TRD-DB100BLKQ</option>
+                            <option value="S ITE M-CORE IX-CIC 40 MOC TBL-DB100MOC6">S ITE M-CORE IX-CIC 40 MOC TBL-DB100MOC6</option>
+                            <option value="S ITE M-CORE IX-CIC 40 BLK TBL-DB100BLKR">S ITE M-CORE IX-CIC 40 BLK TBL-DB100BLKR</option>
+                        <optgroup label="Bi-Core 訂製機">
+                            <option value="KMAT BICORE CUSTOM LI20 CUS.IN-DB100CUS1">KMAT BICORE CUSTOM LI20 CUS.IN-DB100CUS1</option>
+                            <option value="KMAT BICORE CUSTOM LI40 CUS.IN-DB100CUS2">KMAT BICORE CUSTOM LI40 CUS.IN-DB100CUS2</option>
+                            <option value="KMAT BICORE CUSTOM LI60 CUS.IN-DB100CUS3">KMAT BICORE CUSTOM LI60 CUS.IN-DB100CUS3</option>
+                            <option value="KMAT BICORE CUSTOM LI80 CUS.IN-DB100CUS4">KMAT BICORE CUSTOM LI80 CUS.IN-DB100CUS4</option>
+                        <optgroup label="Coselgi MOJO BTE">
+                            <option value="Mojo MBB3 M1 BTE 13 BLK">Mojo MBB3 M1 BTE 13 BLK</option>
+                            <option value="Mojo MBB3 M1 BTE 13 HB">Mojo MBB3 M1 BTE 13 HB</option>
+                            <option value="Mojo MBB3D M2 BTE 13D BLK">Mojo MBB3D M2 BTE 13D BLK</option>
+                            <option value="Mojo MBB3D M2 BTE 13D HB">Mojo MBB3D M2 BTE 13D HB</option>
+                            <option value="Mojo MBB3D M3 BTE 13D BLK">Mojo MBB3D M3 BTE 13D BLK</option>
+                            <option value="Mojo MBB3D M3 BTE 13D HB">Mojo MBB3D M3 BTE 13D HB</option>
+                            <option value="Mojo MBB3D M5 BTE 13D BLK">Mojo MBB3D M5 BTE 13D BLK</option>
+                            <option value="Mojo MBB3D M5 BTE 13D HB">Mojo MBB3D M5 BTE 13D HB</option>
+                            <option value="Mojo MBB3D M7 BTE 13D BLK">Mojo MBB3D M7 BTE 13D BLK</option>
+                            <option value="Mojo MBB3D M7 BTE 13D HB">Mojo MBB3D M7 BTE 13D HB</option>
+                        <optgroup label="Coselgi MOJO RIC">
+                            <option value="Mojo MRB0 M1 RIC 10 BLK">Mojo MRB0 M1 RIC 10 BLK</option>
+                            <option value="Mojo MRB0 M1 RIC 10 HB">Mojo MRB0 M1 RIC 10 HB</option>
+                            <option value="Mojo MRB2D M2 RIC 312D BLK">Mojo MRB2D M2 RIC 312D BLK</option>
+                            <option value="Mojo MRB2D M2 RIC 312D HB">Mojo MRB2D M2 RIC 312D HB</option>
+                            <option value="Mojo MRB2D M3 RIC 312D BLK">Mojo MRB2D M3 RIC 312D BLK</option>
+                            <option value="Mojo MRB2D M3 RIC 312D HB">Mojo MRB2D M3 RIC 312D HB</option>
+                            <option value="Mojo MRB2D M5 RIC 312D BLK">Mojo MRB2D M5 RIC 312D BLK</option>
+                            <option value="Mojo MRB2D M5 RIC 312D HB">Mojo MRB2D M5 RIC 312D HB</option>
+                            <option value="Mojo MRB2D M7 RIC 312D BLK">Mojo MRB2D M7 RIC 312D BLK</option>
+                            <option value="Mojo MRB2D M7 RIC 312D HB">Mojo MRB2D M7 RIC 312D HB</option>
+                        <optgroup label="跨傳Cros"> 
+                            <option value="REXTON Cros RIC 8C DGT-DB18CDGT5">REXTON Cros RIC 8C DGT-DB18CDGT5</option>
+                            <option value="REXTON Cros C 8C SET-DB18CSET1">REXTON Cros C 8C SET-DB18CSET1</option>
+                            <option value="REXTON Cros C 8C GNT-DB100GNT3">REXTON Cros C 8C GNT-DB100GNT3</option>
+                            <option value="M-CORE CROS R GNT-DB100GNT6">M-CORE CROS R GNT-DB100GNT6</option>
+                            <option value="10986404 SET M-CORE CROS R-LI BLK-DB100BLKI">10986404 SET M-CORE CROS R-LI BLK-DB100BLKI</option>
+                            <option value="REXTON cros Li RIC 8C BG-DB100BG26">REXTON cros Li RIC 8C BG-DB100BG26</option>
+                            <option value="REXTON cros Li RIC 8C DGT-DB100DGTB">REXTON cros Li RIC 8C DGT-DB100DGTB</option>
+                            <option value="REXTON cros Li RIC 8C SLV-DB100SLVE">REXTON cros Li RIC 8C SLV-DB100SLVE</option>
+                            <option value="BiCore CROS R-Li BLK-DB110BLK4">BiCore CROS R-Li BLK-DB110BLK4</option>
+                        <optgroup label="耳寶早安"> 
+                            <option value="耳寶早安 BE 90 ( T1 )-UA6DA2CAT">耳寶早安 BE 90 ( T1 )-UA6DA2CAT</option>
+                            <option value="耳寶早安 BE 120 ( T3 XP )-UA6DA3CAT">耳寶早安 BE 120 ( T3 XP )-UA6DA3CAT</option>
+                            <option value="耳寶早安 B2 90 ( P6 P )-UA6DA7CAT">耳寶早安 B2 90 ( P6 P )-UA6DA7CAT</option>
+                            <option value="耳寶早安 B2 120 ( P6 XP )-UA6DA8CAT">耳寶早安 B2 120 ( P6 XP )-UA6DA8CAT</option>
+                            <option value="耳寶早安 I2L 70 ( P6 ITC 左 )-UA6DA5CAT">耳寶早安 I2L 70 ( P6 ITC 左 )-UA6DA5CAT</option>
+                            <option value="耳寶早安 B1 120 ( A4 XP )-UA6DA4CBT">耳寶早安 B1 120 ( A4 XP )-UA6DA4CBT</option>
+                        <optgroup label="耳寶 B1/I1/C1">
+                            <option value="耳寶myHearing B1-UA6S46EAT">耳寶myHearing B1-UA6S46EAT</option>
+                            <option value="耳寶myHearing I1L(左)-UA6S45EAT">耳寶myHearing I1L(左)-UA6S45EAT</option>
+                            <option value="耳寶myHearing C1L(左)-UA6S43EAT">耳寶myHearing C1L(左)-UA6S43EAT</option>
+                            <option value="耳寶myHearing I1L(左)元皓用附耳塞-UA6S45ECT">耳寶myHearing I1L(左)元皓用附耳塞-UA6S45ECT</option>
+                            <option value="耳寶myHearing C1L(左)元皓用附耳塞-UA6S43ECT">耳寶myHearing C1L(左)元皓用附耳塞-UA6S43ECT</option>
+                        <optgroup label="耳寶 Convery Fit系列">
+                            <option value="6EF 左耳機-BP6EF10M2C">6EF 左耳機-BP6EF10M2C</option>
+                            <option value="耳寶 Mimitakara 6EN 石磨黑-DP6EN10CA">耳寶 Mimitakara 6EN 石磨黑-DP6EN10CA</option>
+                            <option value="耳寶 Mimitakara 6EN 象牙白-DP6EN20CA">耳寶 Mimitakara 6EN 象牙白-DP6EN20CA</option>
+                            <option value="6SE 左耳機 黑- BA6SE21M2A">6SE 左耳機 黑- BA6SE21M2A</option>
+                            <option value="6SE 左耳機 白- BA6SE22M2A">6SE 左耳機 白- BA6SE22M2A</option>
+                            <option value="6EF數位藍牙RIC耳掛型助聽器-DP6EF10CB">6EF數位藍牙RIC耳掛型助聽器-DP6EF10CB</option>
+                        <optgroup label="耳寶 6EL & MFi">
+                            <option value="耳寶 雙耳藍芽隨身充電式-6ELA(黑)-DP6ELA0CD">耳寶 雙耳藍芽隨身充電式-6ELA(黑)-DP6ELA0CD</option>
+                            <option value="耳寶 雙耳藍芽隨身充電式-6ELB(白)-DP6ELB0CD">耳寶 雙耳藍芽隨身充電式-6ELB(白)-DP6ELB0CD</option>
+                            <option value="耳寶 Mimitakara MFi R1耳掛式助聽器-DP6E623CB">耳寶 Mimitakara MFi R1耳掛式助聽器-DP6E623CB</option>
+                            <option value="耳寶 Mimitakara MFi R2耳掛式助聽器-DP6EC23CB">耳寶 Mimitakara MFi R2耳掛式助聽器-DP6EC23CB</option>
+                            <option value="耳寶 Mimitakara MFi R3耳掛式助聽器-DP6E211CB">耳寶 Mimitakara MFi R3耳掛式助聽器-DP6E211CB</option>
+                        <optgroup label="耳寶 脖掛/口袋/骨導">
+                            <option value="6KB3 goodHearing A1 脖掛新旗艦-DP6EB21CB">6KB3 goodHearing A1 脖掛新旗艦-DP6EB21CB</option>
+                            <option value="6E52 goodHearing P1-DP6E521CA">6E52 goodHearing P1-DP6E521CA</option>
+                            <option value="6KB3脖掛助聽器旗艦版(黑)-DP6KB31C2">6KB3脖掛助聽器旗艦版(黑)-DP6KB31C2</option>
+                            <option value="6KB脖掛助聽器(黑)-DP6KB21C2">6KB脖掛助聽器(黑)-DP6KB21C2</option>
+                            <option value="6KB脖掛助聽器(白)-DP6KB20C2">6KB脖掛助聽器(白)-DP6KB20C2</option>
+                            <option value="6k52 口袋型藍牙助聽器-DP6K536C2">6k52 口袋型藍牙助聽器-DP6K536C2</option>
+                            <option value="耳寶 6K44 骨導集音器-DP6K441CA">耳寶 6K44 骨導集音器-DP6K441CA</option>
+                        <optgroup label="耳寶 其他">
+                            <option value="64KA PRO日本耳寶耳掛充電式助聽器-UP6S5ACAT(雙耳)">64KA PRO日本耳寶耳掛充電式助聽器-UP6S5ACAT(雙耳)</option>
+                            <option value="64KA 日本耳寶耳掛充電式助聽器-TP64KACAR">64KA 日本耳寶耳掛充電式助聽器-TP64KACAR</option>
+                            <option value="6S47 數位雙頻耳掛細導管助聽器-UA6S47EAT">6S47 數位雙頻耳掛細導管助聽器-UA6S47EAT</option>
+                            <option value="(新)6B7 玫瑰金- DP6B786C1G">(新)6B7 玫瑰金- DP6B786C1G</option>
+                            <option value="耳寶 6SY5 (中)耳內型助聽器-TP6SY5CA">耳寶 6SY5 (中)耳內型助聽器-TP6SY5CA</option>
+                            <option value="耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ3CC">耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ3CC</option>
+                            <option value="6SA2 耳內型充電式助聽器(打火)-TP64Z6CIR">6SA2 耳內型充電式助聽器(打火)-TP64Z6CIR</option>
+                            <option value="6ETS 日本耳寶雙耳耳掛充電式助聽器-UP6ETSCET">6ETS 日本耳寶雙耳耳掛充電式助聽器-UP6ETSCET</option>
+                            <option value="Mimitakara 6SC2-VIVA版-DP6SC21CGG">Mimitakara 6SC2-VIVA版-DP6SC21CGG</option>
+                            <option value="耳寶 6CE2 數位非充電耳掛 助聽器-DP6CE26C2">耳寶 6CE2 數位非充電耳掛 助聽器-DP6CE26C2</option>
+                            <option value="耳寶 6CA2數位助聽器-TP6CA2CAR">耳寶 6CA2數位助聽器-TP6CA2CAR</option>
+                            <option value="Mimitakara 6S31輔聽器- UP6S31CAT">Mimitakara 6S31輔聽器- UP6S31CAT</option>
+                            <option value="(F) - 6SA2 耳內型充電式助聽器(單槽)(新)-TP6SZ6CER">(F) - 6SA2 耳內型充電式助聽器(單槽)(新)-TP6SZ6CER</option>
+                            <option value="(F)耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ0CB">(F)耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ0CB</option>
+                            <option value="(F) - 6SY5 (英)耳內型助聽器-TP6SY5CB">(F) - 6SY5 (英)耳內型助聽器-TP6SY5CB</option>
+                            <option value="(F)-6B7耳掛式助聽器(黑銀)-DP6B756C3">(F)-6B7耳掛式助聽器(黑銀)-DP6B756C3</option>
+                            <option value="(F)-6B7耳掛式助聽器(玫瑰金)-DP6B786C3">(F)-6B7耳掛式助聽器(玫瑰金)-DP6B786C3</option>
+                            <option value="6B51 耳掛式集音器-DP6B516C1">6B51 耳掛式集音器-DP6B516C1</option>
+                            <option value="6B7 耳掛式助聽器(白)-DP6B736C3">6B7 耳掛式助聽器(白)-DP6B736C3</option>
+                            <option value="(經銷商用)耳寶6K5D-DP6KCD1CD">(經銷商用)耳寶6K5D-DP6KCD1CD</option>
+                            <option value="(經銷商用)耳寶6K5D英文版-DP6KCD1CA">(經銷商用)耳寶6K5D英文版-DP6KCD1CA</option>
+                        <optgroup label="A&M"> 
+                            <option value="A&amp;M T3 XP-DB106XPT3">A&amp;M T3 XP-DB106XPT3</option>
+                            <option value="A&amp;M A4 P BG-DB108XA0P">A&amp;M A4 P BG-DB108XA0P</option>
+                            <option value="A&amp;M A4 XP BG-DB108XAXP">A&amp;M A4 XP BG-DB108XAXP</option>
+                            <option value="A&amp;M A4 CIC L-DB10CICA40">A&amp;M A4 CIC L-DB10CICA40</option>
+                            <option value="A&amp;M A4 ITC L-DB10ITCA40">A&amp;M A4 ITC L-DB10ITCA40</option>
+                            <option value="A&amp;M A4 ITC R-DB10ITCA41">A&amp;M A4 ITC R-DB10ITCA41</option>
+                            <option value="A&amp;M T1 P-DB18CHA02">A&amp;M T1 P-DB18CHA02</option>
+                            <option value="A&amp;M T3 P-DB1060ST3">A&amp;M T3 P-DB1060ST3</option>
+                            <option value="A&amp;M A4 CIC R-DB10CICA41">A&amp;M A4 CIC R-DB10CICA41</option>
+                            <option value="A&amp;M P8 XP BG-DB100XP01">A&amp;M P8 XP BG-DB100XP01</option>
+                            <option value="A&amp;M P8 RIC BG-DB100XTM0">A&amp;M P8 RIC BG-DB100XTM0</option>
+                            <option value="A&amp;M P8 P BG-DB100XTM1">A&amp;M P8 P BG-DB100XTM1</option>
+                            <option value="A&amp;M P6 P GR-DB112GR02">A&amp;M P6 P GR-DB112GR02</option>
+                            <option value="A&amp;M P6 P BG-DB112XPP6">A&amp;M P6 P BG-DB112XPP6</option>
+                            <option value="A&amp;M P6 XP BG-DB112XXP6">A&amp;M P6 XP BG-DB112XXP6</option>
+                            <option value="A&amp;M P6 ITC L-DB112IFP6">A&amp;M P6 ITC L-DB112IFP6</option>
+                            <option value="A&amp;M P6 ITC R-DB112IFR6">A&amp;M P6 ITC R-DB112IFR6</option>
+                            <option value="A&amp;M XTM IF P6 T3 MOC R BG-DB108IFP5">A&amp;M XTM IF P6 T3 MOC R BG-DB108IFP5</option>
+                        <optgroup label="Stellar Li">
+                            <option value="Stellar Li 60 8C DGT-DB100DGT5">Stellar Li 60 8C DGT-DB100DGT5</option>
+                            <option value="Stellar Li 40 8C BG-DB108RIC0">Stellar Li 40 8C BG-DB108RIC0</option>
+                            <option value="Stellar Li 40 8C SLV-DB108RIC1">Stellar Li 40 8C SLV-DB108RIC1</option>
+                            <option value="Stellar Li 40 8C DGT-DB108RIC2">Stellar Li 40 8C DGT-DB108RIC2</option>
+                            <option value="Stellar Li 20 8C BG-DB1162001">Stellar Li 20 8C BG-DB1162001</option>
+                            <option value="Stellar Li 20 8C SLV-DB1162002">Stellar Li 20 8C SLV-DB1162002</option>
+                            <option value="Stellar Li 20 8C DGT-DB1162003">Stellar Li 20 8C DGT-DB1162003</option>
+                            <option value="Stellar Li 30 8C BG-DB1163001">Stellar Li 30 8C BG-DB1163001</option>
+                            <option value="Stellar Li 30 8C DGT-DB1163003">Stellar Li 30 8C DGT-DB1163003</option>
+                            <option value="Stellar Li 30 E1-DB116L301">Stellar Li 30 E1-DB116L301</option>
+                            <option value="REXTON Stellar Li 80 8C DGT-DB100DGT6">REXTON Stellar Li 80 8C DGT-DB100DGT6</option>
+                            <option value="REXTON Stellar M 40 8C BG-DB1004002">REXTON Stellar M 40 8C BG-DB1004002</option>
+                            <option value="REXTON Stellar M 40 8C SLV-DB1004003">REXTON Stellar M 40 8C SLV-DB1004003</option>
+                            <option value="REXTON Stellar M 40 8C DGT-DB1004004">REXTON Stellar M 40 8C DGT-DB1004004</option>
+                            <option value="REXTON Stellar M 20 8C BG-DB1162004">REXTON Stellar M 20 8C BG-DB1162004</option>
+                            <option value="REXTON Stellar M 20 8C SLV-DB1162005">REXTON Stellar M 20 8C SLV-DB1162005</option>
+                            <option value="REXTON Stellar M 20 8C DGT-DB1162006">REXTON Stellar M 20 8C DGT-DB1162006</option>
 
-            <table>
-                <tr>
-                   <th><label for="barcodeInput">黑貓單號:</label></th>
-                   <td><input type="text" id="barcodeInput" class="small-input" oninput="updateQRCode()" title="12碼阿拉伯數字；Ex:120355030991"></td>
-                <!-- QR Code 顯示區 -->
-                   <td><canvas id="qrCode" class="qrCode"></canvas></td>
-                </tr>
-            </table>
+                        <optgroup label="M-Core RIC">
+                            <option value="M-CORE R-LI 20 BG-DB100BG23">M-CORE R-LI 20 BG-DB100BG23</option>
+                            <option value="M-CORE R-LI 20 BLK-DB100BLKC">M-CORE R-LI 20 BLK-DB100BLKC</option>
+                            <option value="M-Core R-Li 40 BG-DB100BG03">M-Core R-Li 40 BG-DB100BG03</option>
+                            <option value="REXTON M-Core R-Li 40 BLK-DB100DGT3">REXTON M-Core R-Li 40 BLK-DB100DGT3</option>
+                            <option value="REXTON M-Core R-LI 40 RGD-DB100RGD1">REXTON M-Core R-LI 40 RGD-DB100RGD1</option>
+                            <option value="M-Core R-Li 40 SLV-DB100SLV2">M-Core R-Li 40 SLV-DB100SLV2</option>
+                            <option value="HA M-CORE R-LI 60 BG-DB100BG21">HA M-CORE R-LI 60 BG-DB100BG21</option>
+                            <option value="HA M-CORE R-LI 60 GNT-DB100GNT7">HA M-CORE R-LI 60 GNT-DB100GNT7</option>
+                            <option value="M-CORE R-LI 60 GNT-DB100GNT7">M-CORE R-LI 60 GNT-DB100GNT7</option>
+                            <option value="HA M-CORE R-LI 60 BLK-DB100BLKG">HA M-CORE R-LI 60 BLK-DB100BLKG</option>
+                            <option value="HA M-CORE R-LI 60 SLV-DB100SLVD">HA M-CORE R-LI 60 SLV-DB100SLVD</option>
+                            <option value="HA M-CORE R-LI 80 BG-DB100BG22">HA M-CORE R-LI 80 BG-DB100BG22</option>
+                            <option value="HA M-CORE R-LI 80 BLK-DB100BLKH">HA M-CORE R-LI 80 BLK-DB100BLKH</option>
+                            <option value="HA M-CORE SR 20 BLK BLKG-DB100BLKL">HA M-CORE SR 20 BLK BLKG-DB100BLKL</option>
+                            <option value="HA M-CORE SR 40 BLK SLV-DB100BLKF">HA M-CORE SR 40 BLK SLV-DB100BLKF</option>
+                            <option value="HA M-CORE SR 40 SNW RGD-DB100RGD7">HA M-CORE SR 40 SNW RGD-DB100RGD7</option> 
+                            <option value="REXTON M-CORE SR 80 BLK BLKG-DB100BLKK">REXTON M-CORE SR 80 BLK BLKG-DB100BLKK</option>
+                            <option value="HA M-CORE SR 80 SNW SNWG-DB100SG01">HA M-CORE SR 80 SNW SNWG-DB100SG01</option> 
+                            <option value="M-Core R312 40 SLV-DB100SLV1">M-Core R312 40 SLV-DB100SLV1</option>
+                            <option value="10969423 M-Core R312 40 BLK-DB100DGT2">10969423 M-Core R312 40 BLK-DB100DGT2</option>
+                            <option value="REXTON M-Core R312 40 DEEP BROWN-DB100DB01">REXTON M-Core R312 40 DEEP BROWN-DB100DB01</option>
+                            <option value="REXTON M-Core R312 60 Granite-DB100GR02">REXTON M-Core R312 60 Granite-DB100GR02</option>
+                            <option value="REXTON M-Core R312 60 BLK-DB100BKL1">REXTON M-Core R312 60 BLK-DB100BKL1</option>
+                            <option value="REXTON M-Core R312 80 BG-DB100BG12">REXTON M-Core R312 80 BG-DB100BG12</option>
+                            <option value="REXTON M-Core R312 80 BLK-DB100DGT9">REXTON M-Core R312 80 BLK-DB100DGT9</option>
+                            <option value="REXTON M-Core R312 80 SLV-DB100SLV8">REXTON M-Core R312 80 SLV-DB100SLV8</option>
+                            <option value="REXTON M-Core R312 80 GNT-DB100GNT4">REXTON M-Core R312 80 GNT-DB100GNT4</option>
+                        <optgroup label="ReCharge">
+                            <option value="HA RECHARGE B-LI HP 10 Z BG">HA RECHARGE B-LI HP 10 Z BG</option>
+                            <option value="HA RECHARGE B-LI HP 10 Z BLK">HA RECHARGE B-LI HP 10 Z BLK</option>
+                            <option value="HA RECHARGE B-LI HP 5 Z BG">HA RECHARGE B-LI HP 5 Z BG</option>
+                            <option value="HA RECHARGE B-LI HP 5 Z BLK">HA RECHARGE B-LI HP 5 Z BLK</option>
+                            <option value="HA RECHARGE B-LI P 10 Z BG">HA RECHARGE B-LI P 10 Z BG</option>
+                            <option value="HA RECHARGE B-LI P 10 Z BLK">HA RECHARGE B-LI P 10 Z BLK</option>
+                            <option value="HA RECHARGE B-LI P 5 Z BG">HA RECHARGE B-LI P 5 Z BG</option>
+                            <option value="HA RECHARGE B-LI P 5 Z BLK">HA RECHARGE B-LI P 5 Z BLK</option>
+                            <option value="HA RECHARGE R-LI 10 Z BG">HA RECHARGE R-LI 10 Z BG</option>
+                            <option value="HA RECHARGE R-LI 10 Z BLK">HA RECHARGE R-LI 10 Z BLK</option>
+                            <option value="HA RECHARGE R-LI 5 Z BG">HA RECHARGE R-LI 5 Z BG</option>
+                            <option value="HA RECHARGE R-LI 5 Z BLK">HA RECHARGE R-LI 5 Z BLK</option>
+                        <optgroup label="Mosaic">
+                            <option value="Mosaic HP 10 E1 BG-DB100XP02">Mosaic HP 10 E1 BG-DB100XP02</option>
+                            <option value="REXTON Mosaic HP 40 6C DGT-DB100DGT7">REXTON Mosaic HP 40 6C DGT-DB100DGT7</option>
+                            <option value="REXTON Mosaic HP 10 E1 GR-DB100GR03">REXTON Mosaic HP 10 E1 GR-DB100GR03</option>
+                            <option value="Mosaic M 10 E1 BG-DB100E101">Mosaic M 10 E1 BG-DB100E101</option>
+                            <option value="Mosaic P 10 E1 BG-DB112BG01">Mosaic P 10 E1 BG-DB112BG01</option>
+                            <option value="Mosaic P 10 E1 GR-DB112GR01">Mosaic P 10 E1 GR-DB112GR01</option>
+                            <option value="REXTON Mosaic P 40 6C BG-DB16CHB01">REXTON Mosaic P 40 6C BG-DB16CHB01</option>
+                            <option value="REXTON Mosaic P 80 8C BG-DB18CBG03">REXTON Mosaic P 80 8C BG-DB18CBG03</option>
+                            <option value="REXTON Mosaic P 80 8C DGT-DB18CDGT3">REXTON Mosaic P 80 8C DGT-DB18CDGT3</option>
+                            <option value="REXTON Mosaic P 60 8C DGT-DB18CDGT4">REXTON Mosaic P 60 8C DGT-DB18CDGT4</option>
+                            <option value="REXTON Mosaic P 40 8C BG-DB18CHA01">REXTON Mosaic P 40 8C BG-DB18CHA01</option>
+                            <option value="REXTON Mosaic M 40 8C BG-DB18CHB02">REXTON Mosaic M 40 8C BG-DB18CHB02</option>
+                            <option value="REXTON Mosaic P 40 8C DGT-DB18CHD01">REXTON Mosaic P 40 8C DGT-DB18CHD01</option>
+                            <option value="REXTON Mosaic M 40 8C DGT-DB18CHD02">REXTON Mosaic M 40 8C DGT-DB18CHD02</option>
+                            <option value="REXTON Mosaic P 80 8C SLV-DB18CSLV3">REXTON Mosaic P 80 8C SLV-DB18CSLV3</option>
+                            <option value="REXTON Mosaic P 60 8C SLV-DB18CSLV4">REXTON Mosaic P 60 8C SLV-DB18CSLV4</option>
+                            <option value="REXTON Mosaic P 20 8C BG-DB2M08BG10">REXTON Mosaic P 20 8C BG-DB2M08BG10</option>
+                            <option value="REXTON Mosaic P 20 8C DGT-DB2M08DG10">REXTON Mosaic P 20 8C DGT-DB2M08DG10</option>
+                            <option value="REXTON MOSAIC P 40 8C SLV-DB18CHS01">REXTON MOSAIC P 40 8C SLV-DB18CHS01</option>
+                            <option value="REXTON MOSAIC M 40 6C BG-DB1240M40">REXTON MOSAIC M 40 6C BG-DB1240M40</option>
+                            <option value="REXTON Mosaic P 20 8C SLV-DB100SLV5">REXTON Mosaic P 20 8C SLV-DB100SLV5</option>
+                            <option value="REXTON Mosaic M 20 8C BG-DB100BG11">REXTON Mosaic M 20 8C BG-DB100BG11</option>
+                            <option value="REXTON Mosaic M 20 8C SLV-DB100SLV7">REXTON Mosaic M 20 8C SLV-DB100SLV7</option>
+                            <option value="REXTON Mosaic M 20 8C DGT-DB100DGT8">REXTON Mosaic M 20 8C DGT-DB100DGT8</option>
+                        <optgroup label="Emeraid">
+                            <option value="Emerald S 20 8C SLV-DB100SLV3">Emerald S 20 8C SLV-DB100SLV3</option>
+                            <option value="Emerald S 80 6C BG-DB106BG01">Emerald S 80 6C BG-DB106BG01</option>
+                            <option value="Emerald S 30 6C-DB1160E30">Emerald S 30 6C-DB1160E30</option>
+                            <option value="Emerald S 40 8C DGT-DB124ED40">Emerald S 40 8C DGT-DB124ED40</option>
+                            <option value="Emerald S 40 8C SLV-DB124EI40">Emerald S 40 8C SLV-DB124EI40</option>
+                            <option value="REXTON Emerald S 40 8C BG-DB124ES40">REXTON Emerald S 40 8C BG-DB124ES40</option>
+                            <option value="REXTON Emerald S 40 6C SLV-DB124ES42">REXTON Emerald S 40 6C SLV-DB124ES42</option>
+                            <option value="REXTON Emerald S 80 8C BG-DB18CBG01">REXTON Emerald S 80 8C BG-DB18CBG01</option>
+                            <option value="REXTON Emerald S 80 8C DGT-DB18CDGT1">REXTON Emerald S 80 8C DGT-DB18CDGT1</option>
+                            <option value="REXTON Emerald S 60 8C DGT-DB18CDGT2">REXTON Emerald S 60 8C DGT-DB18CDGT2</option>
+                            <option value="REXTON Emerald S 80 8C SLV-DB18CSLV1">REXTON Emerald S 80 8C SLV-DB18CSLV1</option>
+                            <option value="REXTON Emerald S 60 8C SLV-DB18CSLV2">REXTON Emerald S 60 8C SLV-DB18CSLV2</option>
+                            <option value="REXTON Emerald S 20 8C DGT-DB100DGT4">REXTON Emerald S 20 8C DGT-DB100DGT4</option>
+                            <option value="Rexton Emerald S 20 8C BG-DB100BG04">Rexton Emerald S 20 8C BG-DB100BG04</option>
+                            <option value="Emerald M 80 8C DGT-DB100DGT1">Emerald M 80 8C DGT-DB100DGT1</option>
+                            <option value="Emerald M 20 8C DGT-DB1080DG1">Emerald M 20 8C DGT-DB1080DG1</option>
+                            <option value="Emerald M 20 8C BG-DB1080SG1">Emerald M 20 8C BG-DB1080SG1</option>
+                            <option value="Emerald M 20 8C SLV-DB1080SL1">Emerald M 20 8C SLV-DB1080SL1</option>
+                            <option value="Emerald M 40 8C BG-DB124EB40">Emerald M 40 8C BG-DB124EB40</option>
+                            <option value="Emerald M 40 8C DGT-DB124ED41">Emerald M 40 8C DGT-DB124ED41</option>
+                            <option value="REXTON Emerald M 60 8C DGT-DB180DGT3">REXTON Emerald M 60 8C DGT-DB180DGT3</option>
+                            <option value="Emerald M 60 8C BG-DB180BG03">Emerald M 60 8C BG-DB180BG03</option>
+                            <option value="Rexton Emerald M 80 8C BG-DB100BG01">Rexton Emerald M 80 8C BG-DB100BG01</option>
+                            <option value="REXTON EMERLARD M 20 8C SLV-DB1080SL1">REXTON EMERLARD M 20 8C SLV-DB1080SL1</option>
+                            <option value="Emerald S 10 E1 BG-DB110BG01">Emerald S 10 E1 BG-DB110BG01</option>
+                            <option value="Emerald S 10 E1 DGT-DB110DGT1">Emerald S 10 E1 DGT-DB110DGT1</option>
+                        <optgroup label="Streling">
+                            <option value="Sterling 40 6C-DB1004001">Sterling 40 6C-DB1004001</option>
+                            <option value="Sterling 60 8C-DB1006001">Sterling 60 8C-DB1006001</option>
+                            <option value="Sterling 10 E1-DB100E103">Sterling 10 E1-DB100E103</option>
+                            <option value="Steyle Line BT 40 8C L2 Blue-DB100BT01">Steyle Line BT 40 8C L2 Blue-DB100BT01</option>
+                            <option value="Steyle Line BT 40 8C R2 Blue-DB100BT02">Steyle Line BT 40 8C R2 Blue-DB100BT02</option>
+                            <option value="Sterling 20 E1-DB100E102">Sterling 20 E1-DB100E102</option>
+                            <option value="Sterling 40 8C-DB100ITC1">Sterling 40 8C-DB100ITC1</option>
+                            <option value="Stellar Li 60 8C SLV-DB100SL60">Stellar Li 60 8C SLV-DB100SL60</option>
+                            <option value="REXTON Sterling 20 8C 耳內機海外製成品-DB1002001">REXTON Sterling 20 8C 耳內機海外製成品-DB1002001</option>
+                            <option value="REXTON Sterling 80-DB1008002">REXTON Sterling 80-DB1008002</option>
+                            <option value="Sterling 5 E1-DB1005001">Sterling 5 E1-DB1005001</option>
+                            <option value="REXTON Sterling 5 訂製耳內機(台製)-K2118STE02">REXTON Sterling 5 訂製耳內機(台製)-K2118STE02</option>
+                        <optgroup label="INOX">
+                            <option value="INOX CIC 40 8C MOC L-DB124CIL1">INOX CIC 40 8C MOC L-DB124CIL1</option>
+                            <option value="INOX CIC 40 8C BLK L-DB124CIL2">INOX CIC 40 8C BLK L-DB124CIL2</option>
+                            <option value="INOX CIC 60 8C BLK L-DB124CIL3">INOX CIC 60 8C BLK L-DB124CIL3</option>
+                            <option value="INOX CIC 80 8C BLK L-DB124CIL5">INOX CIC 80 8C BLK L-DB124CIL5</option>
+                            <option value="REXTON INOX 40 6C L MOC-DB124EL40">REXTON INOX 40 6C L MOC-DB124EL40</option>
+                            <option value="REXTON INOX CIC 60 8C 32CH L Mocha-DB124CIL4">REXTON INOX CIC 60 8C 32CH L Mocha-DB124CIL4</option>
+                            <option value="Rexton INOX 80 8C L Mocha-DB124CIL6">Rexton INOX 80 8C L Mocha-DB124CIL6</option>
+                            <option value="HA INOX 80 6C CIC L MOC-DB100CI01">HA INOX 80 6C CIC L MOC-DB100CI01</option>
+                        <optgroup label="特殊機型">
+                            <option value="JOY S 30-DB1160J30">JOY S 30-DB1160J30</option>
+                            <option value="JOY HP 20-DB116OJ2H">JOY HP 20-DB116OJ2H</option>
+                            <option value="ACCORD 20 HP BG-DB1240A12">ACCORD 20 HP BG-DB1240A12</option>
+                    </select></th>
+                <th><label for="subsidy-items"> 補助項次:</label></th>
+                <th><span id="subsidy"></span></th>
+            </tr>
+            <tr>
+                <th colspan="2">補助必備功能</th>
+                <th colspan="2">其他附加功能</th>
+            </tr>
+            <tr><td colspan="2" class="mid-level">符合中階型</td><td>內建實耳測量功能</td><td><span id="realear"></span></td></tr>
+            <tr><td>具六個壓縮頻道以上</td><td><span id="channel"></span></td><td>與線圈系統相容</td><td><span id="tcoil"></span></td></tr>
+            <tr><td>多聆聽程式</td><td><span id="program"></span></td><td>與遙控裝置相容</td><td><span id="devicecontrol"></span></td></tr>
+            <tr><td>自動適應噪音抑制</td><td><span id="noise"></span></td><td>頻率壓縮、搬移</td><td><span id="compression"></span></td></tr>
+            <tr><td>迴饋音消除</td><td><span id="feedback"></span></td><td>資料記錄</td><td><span id="data"></span></td></tr>
+            <tr><td colspan="2" class="advanced-level">符合進階型</td><td>學習（可訓練）功能</td><td><span id="learning"></span></td></tr>
+            <tr><td>方（指）向性麥克風</td><td><span id="directional"></span></td><td>自動情境辨識（切換）功能</td><td><span id="recognition"></span></td></tr>
+            <tr><td>與無線傳輸系統相容</td><td><span id="wireless"></span></td><td>雙耳同步功能</td><td><span id="synchronous"></span></td></tr>
 
+    </table>
+<script>
 
-            <table>
-                <tr>
-                    <th>寄件日期</th>
-                    <td><input type="date" id="shippingDate" name="shippingDate"></td>
-                    <th>收件人</th>
-                    <td><input type="text" id="receiver" name="receiver" title="EX:元健大和"></td>
-                </tr>
-            </table>
+<!-- HA定義 -->
+    const modelselect = document.getElementById("modelselect");                /* 型號 */
+    const channel = document.getElementById("channel");                        /* 頻道數 */
+    const program = document.getElementById("program");                        /* 多聆聽程式 */
+    const noise = document.getElementById("noise");                            /* 自適應噪音 */
+    const feedback = document.getElementById("feedback");                      /* 回饋音消除 */
+    const directional = document.getElementById("directional");                /* 方（指）向性麥克風 */
+    const wireless = document.getElementById("wireless");                      /* 與無線傳輸系統相容 */
 
-            <table>
-                <tr>
-                    <th>品名</th>
-                    <th>備註(姓名/發票號碼)</th>
-                    <th>收件者</th>
-                    <th>簽收</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item1" title="輸入品名"></td>
-                    <td><input type="text" name="remark1" title="輸入備註(姓名/發票號碼)"></td>
-                    <td><input type="text" name="recipient1" title="輸入收件者"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item2"></td>
-                    <td><input type="text" name="remark2"></td>
-                    <td><input type="text" name="recipient2"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item3"></td>
-                    <td><input type="text" name="remark3"></td>
-                    <td><input type="text" name="recipient3"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item4"></td>
-                    <td><input type="text" name="remark4"></td>
-                    <td><input type="text" name="recipient4"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item5"></td>
-                    <td><input type="text" name="remark5"></td>
-                    <td><input type="text" name="recipient5"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item6"></td>
-                    <td><input type="text" name="remark6"></td>
-                    <td><input type="text" name="recipient6"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item7"></td>
-                    <td><input type="text" name="remark7"></td>
-                    <td><input type="text" name="recipient7"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item8"></td>
-                    <td><input type="text" name="remark8"></td>
-                    <td><input type="text" name="recipient8"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="item9"></td>
-                    <td><input type="text" name="remark9"></td>
-                    <td><input type="text" name="recipient9"></td>
-                    <td></td>
-                </tr>
-            </table>
+    const realear = document.getElementById("realear");                        /* 內建實耳測量功能 */
+    const tcoil = document.getElementById("tcoil");                            /* 與線圈系統相容 */
+    const devicecontrol = document.getElementById("devicecontrol");            /* 與遙控裝置相容 */
+    const compression = document.getElementById("compression");                /* 頻率壓縮、搬移 */
+    const data = document.getElementById("data");                              /* 資料記錄 */
+    const learning = document.getElementById("learning");                      /* 學習（可訓練）功能 */
+    const recognition = document.getElementById("recognition");                /* 自動情境辨識（切換）功能 */
+    const synchronous = document.getElementById("synchronous");                /* 雙耳同步功能 */
+    const subsidy = document.getElementById("subsidy");                        /* 補助項次 */
 
-            <!-- 寄件人輸入欄位 -->
-            <table>
-                <tr>
-                   <th>寄件人:</th>
-                   <td><input type="text" id="sender" name="sender" title="EX:華小璋"></td>
-                </tr>
-            </table>
+    modelselect.addEventListener("change", function () {
+        const selectedValue = modelselect.value;
 
-            <!-- 列印按鈕區域 -->
-            <div class="print-button-container">
-                <button class="print-button" onclick="printContent()">列印</button>
-            </div>
-        </div>
+if (selectedValue === "REXTON Cros RIC 8C DGT-DB18CDGT5") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "REXTON Cros C 8C SET-DB18CSET1") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "REXTON Cros C 8C GNT-DB100GNT3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "M-CORE CROS R GNT-DB100GNT6") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "10986404 SET M-CORE CROS R-LI BLK-DB100BLKI") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "REXTON cros Li RIC 8C BG-DB100BG26") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "REXTON cros Li RIC 8C DGT-DB100DGTB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "REXTON cros Li RIC 8C SLV-DB100SLVE") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+} else if (selectedValue === "耳寶myHearing B1-UA6S46EAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6S47 數位雙頻耳掛細導管助聽器-UA6S47EAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6ETS 日本耳寶雙耳耳掛充電式助聽器-UP6ETSCET") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "64KA 日本耳寶耳掛充電式助聽器-TP64KACAR") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6B51 耳掛式集音器-DP6B516C1")  {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6B7 耳掛式助聽器(白)-DP6B736C3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(F)-6B7耳掛式助聽器(黑銀)-DP6B756C3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(F)-6B7耳掛式助聽器(玫瑰金)-DP6B786C3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing C1L(左)-UA6S43EAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing I1L(左)-UA6S45EAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6SA2 耳內型充電式助聽器(打火)-TP64Z6CIR") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(F) - 6SA2 耳內型充電式助聽器(單槽)(新)-TP6SZ6CER") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(F) - 6SY5 (英)耳內型助聽器-TP6SY5CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 6SY5 (中)耳內型助聽器-TP6SY5CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(F)耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ0CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 Mimitakara MFi R1耳掛式助聽器-DP6E623CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 Mimitakara MFi R3耳掛式助聽器-DP6E211CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 6CE2 數位非充電耳掛 助聽器-DP6CE26C2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶早安 B1 120 ( A4 XP )-UA6DA4CBT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶早安 BE 90 ( T1 )-UA6DA2CAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶早安 BE 120 ( T3 XP )-UA6DA3CAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 雙耳藍芽隨身充電式-6ELA(黑)-DP6ELA0CD") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 雙耳藍芽隨身充電式-6ELB(白)-DP6ELB0CD") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 6CA2數位助聽器-TP6CA2CAR") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶 6SA2 (中)耳內充電助聽器(雙槽)-TP6SZ3CC") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "64KA PRO日本耳寶耳掛充電式助聽器-UP6S5ACAT(雙耳)") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "Mimitakara 6S31輔聽器- UP6S31CAT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(新)6B7 玫瑰金- DP6B786C1G") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing C1R(右)元皓用附耳塞-UA6S42ECT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing C1L(左)元皓用附耳塞-UA6S43ECT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing I1R(右)元皓用附耳塞-UA6S44ECT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "耳寶myHearing I1L(左)元皓用附耳塞-UA6S45ECT") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(經銷商用)耳寶6K5D-DP6KCD1CD") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "(經銷商用)耳寶6K5D英文版-DP6KCD1CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "Mimitakara 6SC2-VIVA版-DP6SC21CGG") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M T3 XP-DB106XPT3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 P BG-DB108XA0P") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 XP BG-DB108XAXP") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 CIC L-DB10CICA40") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 ITC L-DB10ITCA40") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 ITC R-DB10ITCA41") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M T1 P-DB18CHA02") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M T3 P-DB1060ST3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "A&M A4 CIC R-DB10CICA41") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "Sterling 5 E1-DB1005001") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "REXTON Sterling 5 訂製耳內機(台製)-K2118STE02") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "簡易型";
+} else if (selectedValue === "6EF數位藍牙RIC耳掛型助聽器-DP6EF10CB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "6EF 左耳機-BP6EF10M2C") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "6SE 左耳機 黑- BA6SE21M2A") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "6SE 左耳機 白- BA6SE22M2A") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "耳寶早安 B2 90 ( P6 P )-UA6DA7CAT") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "耳寶早安 B2 120 ( P6 XP )-UA6DA8CAT") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P8 XP BG-DB100XP01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P8 RIC BG-DB100XTM0") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P8 P BG-DB100XTM1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P6 P GR-DB112GR02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P6 P BG-DB112XPP6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "A&M P6 XP BG-DB112XXP6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 60 8C DGT-DB100DGT5") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "M-Core R-Li 40 SLV-DB100SLV2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 40 8C BG-DB108RIC0") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 40 8C SLV-DB108RIC1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 40 8C DGT-DB108RIC2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 20 8C BG-DB1162001") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 20 8C SLV-DB1162002") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 20 8C DGT-DB1162003") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 30 8C BG-DB1163001") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 30 8C DGT-DB1163003") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 30 E1-DB116L301") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar Li 80 8C DGT-DB100DGT6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 40 BG -DB100BG05") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 40 BLK-DB100BLK2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 40 SLV-DB100SLV9") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R-Li 40 BLK-DB100DGT3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 40 8C BG-DB1004002") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 40 8C SLV-DB1004003") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 40 8C DGT-DB1004004") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 20 8C BG-DB1162004") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 20 8C SLV-DB1162005") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Stellar M 20 8C DGT-DB1162006") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";;
+} else if (selectedValue === "REXTON M-Core B-LI-P 20 BG-DB100BG13") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 20 BLK-DB100BLK3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 20 BG-DB100BG14") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 20 BLK-DB100BLK4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 40 BG-DB100BG15") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 40 BLK-DB100BLK5") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 80 BG-DB100BG16") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 80 BLK-DB100BLK6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 60 BG-DB100BG17") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-HP 60 BLK-DB100BLK7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 80 BG-DB100BG18") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 80 BLK-DB100BLK8") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 60 BG-DB100BG19") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-P 60 BLK-DB100BLK9") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R-LI 40 RGD-DB100RGD1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core B-LI-M 20 BG-DB100BG20") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "M-CORE R-LI 20 BLK-DB100BLKC") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 60 BG-DB100BG21") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 60 GNT-DB100GNT7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 80 BLK-DB100BLKH") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "M-Core R-Li 40 BG-DB100BG03") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE SR 40 SNW RGD-DB100RGD7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "M-CORE R-LI 60 GNT-DB100GNT7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-CORE SR 80 BLK BLKG-DB100BLKK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE SR 80 SNW SNWG-DB100SG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 80 BG-DB100BG22") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 60 BLK-DB100BLKG") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "M-CORE R-LI 20 BG-DB100BG23") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE R-LI 60 SLV-DB100SLVD") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE SR 20 BLK BLKG-DB100BLKL") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE SR 40 BLK SLV-DB100BLKF") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE B-LI-M 20 BLK-DB100BLKS") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE B-LI-M 40 BG-DB100BG27") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE B-LI-M 40 BLK-DB100BLKT") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "HA M-CORE B-LI-M 80 BLK-DB100BLKU") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 20 BLK-DB100BLKV") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 20 BG-DB100BG28") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 40 BLK-DB100BLKW") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 40 BG-DB100BG29") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 60 BLK-DB100BLKX") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 60 BG-DB100BG30") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 80 BLK-DB100BLKY") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "BiCore R-Li T 80 BG-DB100BG31") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "Mosaic HP 10 E1 BG-DB100XP02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic HP 40 6C DGT-DB100DGT7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型"
+} else if (selectedValue === "REXTON Mosaic HP 10 E1 GR-DB100GR03") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型"
+} else if (selectedValue === "M-Core R312 40 SLV-DB100SLV1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald S 20 8C SLV-DB100SLV3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Emerald S 80 6C BG-DB106BG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Emerald S 30 6C-DB1160E30") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Emerald S 40 8C DGT-DB124ED40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald S 40 8C SLV-DB124EI40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 40 8C BG-DB124ES40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "REXTON Emerald S 40 6C SLV-DB124ES42") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "REXTON Emerald S 80 8C BG-DB18CBG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 80 8C DGT-DB18CDGT1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 60 8C DGT-DB18CDGT2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 80 8C SLV-DB18CSLV1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 60 8C SLV-DB18CSLV2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald S 20 8C DGT-DB100DGT4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 60 Granite-DB100GR02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 80 BG-DB100BG12") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 80 BLK-DB100DGT9") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 80 SLV-DB100SLV8") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 40 DEEP BROWN-DB100DB01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 60 BLK-DB100BKL1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "Rexton Emerald S 20 8C BG-DB100BG04") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON M-Core R312 80 GNT-DB100GNT4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "10969423 M-Core R312 40 BLK-DB100DGT2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 80 8C DGT-DB100DGT1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Mosaic M 10 E1 BG-DB100E101") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 20 8C DGT-DB1080DG1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 20 8C BG-DB1080SG1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 20 8C SLV-DB1080SL1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Mosaic P 10 E1 BG-DB112BG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Mosaic P 10 E1 GR-DB112GR01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 40 8C BG-DB124EB40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 40 8C DGT-DB124ED41") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 40 6C BG-DB16CHB01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Emerald M 60 8C DGT-DB180DGT3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 80 8C BG-DB18CBG03") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 80 8C DGT-DB18CDGT3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 60 8C DGT-DB18CDGT4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 40 8C BG-DB18CHA01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic M 40 8C BG-DB18CHB02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 40 8C DGT-DB18CHD01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic M 40 8C DGT-DB18CHD02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 80 8C SLV-DB18CSLV3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 60 8C SLV-DB18CSLV4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 20 8C BG-DB2M08BG10") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 20 8C DGT-DB2M08DG10") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON MOSAIC P 40 8C SLV-DB18CHS01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON MOSAIC M 40 6C BG-DB1240M40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic P 20 8C SLV-DB100SLV5") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic M 20 8C BG-DB100BG11") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic M 20 8C SLV-DB100SLV7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Mosaic M 20 8C DGT-DB100DGT8") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Emerald M 60 8C BG-DB180BG03") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Rexton Emerald M 80 8C BG-DB100BG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON EMERLARD M 20 8C SLV-DB1080SL1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Sterling 40 6C-DB1004001") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Sterling 60 8C-DB1006001") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Steyle Line BT 40 8C L2 Blue-DB100BT01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Steyle Line BT 40 8C R2 Blue-DB100BT02") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Sterling 20 E1-DB100E102") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Sterling 40 8C-DB100ITC1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "Stellar Li 60 8C SLV-DB100SL60") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Sterling 20 8C 耳內機海外製成品-DB1002001") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "REXTON Sterling 80-DB1008002") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "進階型";
+} else if (selectedValue === "耳寶早安 I2L 70 ( P6 ITC 左 )-UA6DA5CAT") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "A&M P6 ITC L-DB112IFP6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "A&M P6 ITC R-DB112IFR6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "■";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "Emerald S 10 E1 BG-DB110BG01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "Emerald S 10 E1 DGT-DB110DGT1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "INOX CIC 40 8C MOC L-DB124CIL1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "INOX CIC 40 8C BLK L-DB124CIL2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "INOX CIC 60 8C BLK L-DB124CIL3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "INOX CIC 80 8C BLK L-DB124CIL5") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "REXTON INOX 40 6C L MOC-DB124EL40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "REXTON INOX CIC 60 8C 32CH L Mocha-DB124CIL4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "Rexton INOX 80 8C L Mocha-DB124CIL6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "HA INOX 80 6C CIC L MOC-DB100CI01") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "S_ITE M-CORE IX-CIC 80 MOC TRD-DB100MOC1") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "S_ITE M-CORE IX-CIC 80 BLK TRD-DB100BLKM") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+} else if (selectedValue === "S_ITE M-CORE IX-CIC 80 MOC TBL-DB100MOC2") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S_ITE M-CORE IX-CIC 80 BLK TBL-DB100BLKN") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 60 MOC TRD-DB100MOC3") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 60 BLK TRD-DB100BLKO") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 60 MOC TBL-DB100MOC4") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 60 BLK TBL-DB100BLKP") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX -CIC 40 MOC TRD-DB100MOC5") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 40 BLK TRD-DB100BLKQ") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 40 MOC TBL-DB100MOC6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "S ITE M-CORE IX-CIC 40 BLK TBL-DB100BLKR") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "Sterling 10 E1-DB100E103") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "6KB3脖掛助聽器旗艦版(黑)-DP6KB31C2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "6E52 goodHearing P1-DP6E521CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "6KB3 goodHearing A1 脖掛新旗艦-DP6EB21CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "6k52 口袋型藍牙助聽器-DP6K536C2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "6KB脖掛助聽器(黑)-DP6KB21C2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "6KB脖掛助聽器(白)-DP6KB20C2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "耳寶 6K44 骨導集音器-DP6K441CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "A&M XTM IF P6 T3 MOC R BG-DB108IFP5") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "JOY S 30-DB1160J30") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "JOY HP 20-DB116OJ2H") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "ACCORD 20 HP BG-DB1240A12") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "耳寶 Mimitakara MFi R2耳掛式助聽器-DP6EC23CB") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "BiCore CROS R-Li BLK-DB110BLK4") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "無線收音麥克風設備";
+
+} else if (selectedValue === "耳寶 Mimitakara 6EN 石磨黑-DP6EN10CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "耳寶 Mimitakara 6EN 象牙白-DP6EN20CA") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "KMAT BICORE CUSTOM LI20 CUS.IN-DB100CUS1") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "KMAT BICORE CUSTOM LI40 CUS.IN-DB100CUS2") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "KMAT BICORE CUSTOM LI60 CUS.IN-DB100CUS3") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "KMAT BICORE CUSTOM LI80 CUS.IN-DB100CUS4") {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+
+} else if (selectedValue === "HA M-CORE B-LI-M 60 BLK-DB110BLK6") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BiCore SR 40 BLK BLKG-DB110BLK7") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3 M1 BTE 13 BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MBB3 M1 BTE 13 HB") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MBB3D M2 BTE 13D BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MBB3D M2 BTE 13D HB") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MBB3D M3 BTE 13D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3D M3 BTE 13D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3D M5 BTE 13D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3D M5 BTE 13D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3D M7 BTE 13D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MBB3D M7 BTE 13D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB0 M1 RIC 10 BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MRB0 M1 RIC 10 HB") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MRB2D M2 RIC 312D BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MRB2D M2 RIC 312D HB") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "Mojo MRB2D M3 RIC 312D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB2D M3 RIC 312D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB2D M5 RIC 312D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB2D M5 RIC 312D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB2D M7 RIC 312D BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "Mojo MRB2D M7 RIC 312D HB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 40 BLK/BLK-DB110BLKA") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 40 BG/BG-DB100BG38") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 60 BLK/BLK-DB110BLKB") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 60 BG/BG-DB100BG39") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 80 BLK/BLK-DB110BLKC") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+
+} else if (selectedValue === "BICORE B-LI M RUGGED 80 BG/BG-DB100BG40") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "■";realear.textContent = "■";tcoil.textContent = "■";devicecontrol.textContent = "■";compression.textContent = "■";data.textContent = "■";learning.textContent = "■";recognition.textContent = "■";synchronous.textContent = "■";subsidy.textContent = "進階型";
+ 
+} else if (selectedValue === "HA RECHARGE B-LI HP 10 Z BG") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE B-LI HP 10 Z BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE B-LI P 10 Z BG") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE B-LI P 10 Z BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE R-LI 10 Z BG") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE R-LI 10 Z BLK") {channel.textContent = "■";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "中階型";
+
+} else if (selectedValue === "HA RECHARGE B-LI HP 5 Z BG") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "HA RECHARGE B-LI HP 5 Z BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "HA RECHARGE B-LI P 5 Z BG") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "HA RECHARGE B-LI P 5 Z BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "HA RECHARGE R-LI 5 Z BG") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+} else if (selectedValue === "HA RECHARGE R-LI 5 Z BLK") {channel.textContent = "□";program.textContent = "■";noise.textContent = "■";feedback.textContent = "■";directional.textContent = "■";wireless.textContent = "□";realear.textContent = "■";tcoil.textContent = "□";devicecontrol.textContent = "■";compression.textContent = "□";data.textContent = "■";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "■";subsidy.textContent = "簡易型";
+
+        } else {channel.textContent = "□";program.textContent = "□";noise.textContent = "□";feedback.textContent = "□";directional.textContent = "□";wireless.textContent = "□";realear.textContent = "□";tcoil.textContent = "□";devicecontrol.textContent = "□";compression.textContent = "□";data.textContent = "□";learning.textContent = "□";recognition.textContent = "□";synchronous.textContent = "□";subsidy.textContent = "";
+        }
+    });
+</script>
     </div>
 
-    <!-- JavaScript 代码 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script>
-        // 生成 QR Code
-        var qr = new QRious({
-            element: document.getElementById("qrCode"),
-            size: 100, // QR Code 大小
-            value: ""  // 初始值為空
-        });
+    <!-- 懸浮按鈕 -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-        // 更新 QR Code 並控制顯示狀態
-        function updateQRCode() {
-            var barcodeValue = document.getElementById("barcodeInput").value;
-            var qrCodeElement = document.getElementById("qrCode");
+    <script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const header = document.querySelector('header');
+            const mainContent = document.querySelector('.main-content');
             
-            if (barcodeValue.trim() !== "") {
-                qr.set({ value: barcodeValue });
-                qrCodeElement.style.display = "block"; // 顯示 QR Code
+            if (sidebar.style.left === '0px') {
+                // 隱藏側邊菜單
+                sidebar.style.left = '-200px';
+                header.style.left = '0';
+                mainContent.style.marginLeft = '0';
             } else {
-                qrCodeElement.style.display = "none"; // 隱藏 QR Code
+                // 顯示側邊菜單
+                sidebar.style.left = '0px';
+                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
+                mainContent.style.marginLeft = '200px';
             }
-        }
-        // 列印指定內容
-        function printContent() {
-            window.print();
         }
     </script>
 </body>
