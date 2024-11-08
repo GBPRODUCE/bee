@@ -235,6 +235,33 @@ th {
 tr:nth-child(even) {
     background-color: #f9f9f9; /* 偶數行背景顏色 */
 }
+/* 跑馬燈的容器樣式 */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: none;
+    color: #fff;
+    padding: 10px;
+    font-size: 1.2em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* 跑馬燈文字樣式 */
+.marquee-text {
+    display: inline-block;
+    padding-left: 20%;
+    animation: marquee 10s linear infinite;
+    color:#0000C6;
+}
+
+/* 跑馬燈動畫效果 */
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
 
 ul {
     padding-left: 20px; /* 左側內距 */
