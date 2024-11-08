@@ -33,24 +33,7 @@
     <!-- 懸浮按鈕 -->
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-    <script>
-        function toggleMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const header = document.querySelector('header');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (sidebar.style.left === '0px') {
-                // 隱藏側邊菜單
-                sidebar.style.left = '-200px';
-                header.style.left = '0';
-                mainContent.style.marginLeft = '0';
-            } else {
-                // 顯示側邊菜單
-                sidebar.style.left = '0px';
-                header.style.left = '200px'; // 為 header 添加偏移量，避免遮擋內容
-                mainContent.style.marginLeft = '200px';
-            }
-        }
-    </script>
+    <!-- 引用外部 JavaScript 文件 -->
+    <script src="menu.js"></script>
 </body>
 </html>
