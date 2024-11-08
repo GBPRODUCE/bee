@@ -61,19 +61,7 @@
 
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-    <script>
-        function toggleMenu() {
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (sidebar.style.left === '0px') {
-                sidebar.style.left = '-200px';
-                mainContent.style.marginLeft = '0';
-            } else {
-                sidebar.style.left = '0px';
-                mainContent.style.marginLeft = '200px';
-            }
-        }
-    </script>
+    <!-- 引用外部 JavaScript 文件 -->
+    <script src="menu.js"></script>
 </body>
 </html>
