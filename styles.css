@@ -1,187 +1,243 @@
-        body {
-            font-family: "Microsoft JhengHei", Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4a4a4a;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: left 0.3s ease;
-            font-size: 1.2em;
-        }
-        header a {
-            text-decoration: none;
-            color: #fff;
- 
-        }
-        header a:hover {
-            text-decoration: underline;
-        }
+/* 
+設定主要的頁面樣式，包括字體、背景顏色和基本間距。
+這些設置適用於整體頁面的外觀與感覺，確保一致性。
+*/
+body {
+    font-family: "Microsoft JhengHei", Arial, sans-serif; /* 使用 "Microsoft JhengHei" 字型，若無則使用 Arial 或 sans-serif */
+    background-color: #f4f6f9; /* 設定頁面背景為淺灰色 */
+    color: #333; /* 預設字體顏色為深灰色 */
+    margin: 0; /* 移除頁面的外距 */
+    padding: 0; /* 移除頁面的內距 */
+}
 
-        .container {
-            display: flex;
-            height: 90vh;
-            margin-top: 40px;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -200px;
-            width: 160px;
-            height: 100%;
-            background-color: #4a4a4a;
-            color: #fff;
-            padding: 20px;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            transition: left 0.3s ease;
-            z-index: 999;
-        }
-        .sidebar a {
-            text-decoration: none;
-            color: #eee;
-            padding: 12px;
-            margin: 5px 0;
-            display: block;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .sidebar a:hover {
-            background-color: #6a6a6a;
-        }
+/* 
+設定標頭(header)的樣式
+包含固定位置、背景色、字體顏色及定位等 
+*/
+header {
+    background-color: #4a4a4a; /* 設定標頭的背景顏色為深灰色 */
+    color: #fff; /* 字體顏色為白色 */
+    text-align: center; /* 文字置中對齊 */
+    padding: 10px 0; /* 上下各留 10px 的內距 */
+    position: fixed; /* 固定在頁面上方 */
+    top: 0; /* 定位到頂部 */
+    left: 0; /* 定位到左側 */
+    width: 100%; /* 佔滿整個頁面寬度 */
+    z-index: 1000; /* 設定疊層順序確保 header 在最上層 */
+    transition: left 0.3s ease; /* 左側滑動效果過渡 */
+    font-size: 1.2em; /* 調整字體大小 */
+}
 
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f4f6f9;
-            margin-left: 0;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-        .login-container {
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h1, .login-container h2, .login-container p {
-            text-align: center;
-            color: #333;
-        }
-        .login-container h1 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        .login-container p {
-            font-size: 1.1em;
-            color: #777;
-            margin-bottom: 20px;
-        }
+/* 
+設定 header 中連結的樣式
+ */
+header a {
+    text-decoration: none; /* 去除連結的底線 */
+    color: #fff; /* 連結文字顏色設為白色 */
+}
 
-        /* 表單樣式 */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-        input {
-            width: calc(100% - 20px);
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            background-color: #f9f9f9;
-            transition: border 0.3s;
-        }
-        input:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #3498db;
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #2980b9;
-        }
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-bottom: 10px;
-        }
+header a:hover {
+    text-decoration: underline; /* 滑鼠懸停時顯示底線 */
+}
 
-        /* 懸浮按鈕 */
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #4a4a4a;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1001;
-            font-weight: bold;
-        }
-        .menu-toggle:hover {
-            background-color: #6a6a6a;
-        }
+/* 
+主要容器(container)的樣式
+ */
+.container {
+    display: flex; /* 使用 Flexbox 排版 */
+    height: 90vh; /* 高度為視窗的 90% */
+    margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
+}
 
-        /* 表格樣式 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            color: #333;
-        }
-        th {
-            background-color: #3498db;
-            color: #fff;
-            font-weight: bold;
-            text-align: center;
-            font-size: 1.1em;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        ul {
-            padding-left: 20px;
-            margin: 0;
-            color: #555;
-        }
+/* 
+側邊欄(sidebar)樣式
+ */
+.sidebar {
+    position: fixed; /* 固定位置 */
+    top: 0; /* 靠上方 */
+    left: -200px; /* 預設隱藏在左側 (-200px) */
+    width: 160px; /* 側邊欄寬度 */
+    height: 100%; /* 高度佔滿頁面 */
+    background-color: #4a4a4a; /* 背景顏色深灰色 */
+    color: #fff; /* 字體顏色白色 */
+    padding: 20px; /* 內距 20px */
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+    display: flex; /* 使用 Flexbox 排版 */
+    flex-direction: column; /* 垂直排版 */
+    justify-content: flex-start; /* 垂直對齊上方 */
+    transition: left 0.3s ease; /* 左側滑動效果過渡 */
+    z-index: 999; /* 疊層順序高於大部分元素，但低於 header */
+}
+
+/* 
+側邊欄中的連結樣式
+ */
+.sidebar a {
+    text-decoration: none; /* 去除底線 */
+    color: #eee; /* 字體顏色為淡灰色 */
+    padding: 12px; /* 內距為 12px */
+    margin: 5px 0; /* 每個連結上下間距 5px */
+    display: block; /* 每個連結占據一整行 */
+    border-radius: 5px; /* 圓角效果 */
+    transition: background 0.3s; /* 背景顏色過渡效果 */
+}
+
+.sidebar a:hover {
+    background-color: #6a6a6a; /* 滑鼠懸停時的背景色為稍淺的灰色 */
+}
+
+/* 
+主要內容區(main-content)樣式
+ */
+.main-content {
+    flex: 1; /* 占據剩餘空間 */
+    display: flex; /* 使用 Flexbox 排版 */
+    justify-content: center; /* 水平居中對齊 */
+    align-items: center; /* 垂直居中對齊 */
+    background: #f4f6f9; /* 背景色為淺灰色 */
+    margin-left: 0; /* 預設左側無偏移 */
+    padding: 20px; /* 內距為 20px */
+    transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
+}
+
+/* 
+登入表單容器(login-container)樣式
+ */
+.login-container {
+    width: 100%; /* 寬度佔滿 */
+    max-width: 450px; /* 最大寬度 450px */
+    padding: 30px; /* 內距為 30px */
+    background: #fff; /* 背景顏色白色 */
+    border-radius: 8px; /* 圓角效果 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* 加入陰影 */
+}
+
+/* 登入表單的標題、子標題、段落文字樣式 */
+.login-container h1, .login-container h2, .login-container p {
+    text-align: center; /* 文字置中 */
+    color: #333; /* 字體顏色深灰色 */
+}
+
+.login-container h1 {
+    font-size: 1.8em; /* 標題字體大小 */
+    margin-bottom: 10px; /* 下方間距 */
+}
+
+.login-container p {
+    font-size: 1.1em; /* 段落文字大小 */
+    color: #777; /* 淺灰色文字 */
+    margin-bottom: 20px; /* 下方間距 */
+}
+
+/* 
+表單項目的樣式
+ */
+.form-group {
+    margin-bottom: 15px; /* 表單項目間距 */
+}
+
+label {
+    display: block; /* 占據整行 */
+    margin-bottom: 5px; /* 與下方間距 */
+    font-weight: bold; /* 字體加粗 */
+    color: #333; /* 字體顏色 */
+}
+
+input {
+    width: calc(100% - 20px); /* 寬度調整以符合容器 */
+    padding: 12px; /* 內距 */
+    border: 1px solid #ddd; /* 边框顏色 */
+    border-radius: 5px; /* 圓角 */
+    font-size: 16px; /* 字體大小 */
+    background-color: #f9f9f9; /* 背景顏色 */
+    transition: border 0.3s; /* 邊框過渡效果 */
+}
+
+input:focus {
+    border-color: #3498db; /* 聚焦時邊框顏色 */
+    outline: none; /* 移除預設的邊框 */
+}
+
+button {
+    width: 100%; /* 寬度占滿 */
+    padding: 12px; /* 內距 */
+    border: none; /* 無邊框 */
+    background: #3498db; /* 背景色 */
+    color: #fff; /* 字體顏色 */
+    font-size: 18px; /* 字體大小 */
+    font-weight: bold; /* 加粗 */
+    border-radius: 5px; /* 圓角 */
+    cursor: pointer; /* 滑鼠指標顯示為手 */
+    margin-top: 10px; /* 上方間距 */
+    transition: background 0.3s; /* 背景顏色過渡效果 */
+}
+
+button:hover {
+    background: #2980b9; /* 滑鼠懸停時背景色 */
+}
+
+/* 
+錯誤訊息樣式
+ */
+.error-message {
+    color: red; /* 紅色字體 */
+    text-align: center; /* 置中 */
+    margin-bottom: 10px; /* 下方間距 */
+}
+
+/* 
+懸浮選單按鈕樣式
+ */
+.menu-toggle {
+    position: fixed; /* 固定位置 */
+    top: 20px; /* 頂端偏移 */
+    left: 20px; /* 左側偏移 */
+    background-color: #4a4a4a; /* 背景顏色 */
+    color: #fff; /* 字體顏色 */
+    padding: 10px 20px; /* 內距 */
+    border-radius: 5px; /* 圓角 */
+    cursor: pointer; /* 滑鼠指標 */
+    z-index: 1001; /* 疊層順序 */
+    font-weight: bold; /* 字體加粗 */
+}
+
+.menu-toggle:hover {
+    background-color: #6a6a6a; /* 滑鼠懸停時的背景色 */
+}
+
+/* 
+表格樣式
+ */
+table {
+    width: 100%; /* 寬度占滿 */
+    border-collapse: collapse; /* 去除邊框重疊 */
+    margin-top: 20px; /* 上方間距 */
+    border-radius: 8px; /* 圓角 */
+    overflow: hidden; /* 超出部分隱藏 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+}
+
+th, td {
+    padding: 15px; /* 表格內距 */
+    text-align: left; /* 左對齊 */
+    border-bottom: 1px solid #ddd; /* 下方邊框 */
+    color: #333; /* 字體顏色 */
+}
+
+th {
+    background-color: #3498db; /* 表頭背景色 */
+    color: #fff; /* 表頭字體顏色 */
+    font-weight: bold; /* 表頭字體加粗 */
+    text-align: center; /* 置中 */
+    font-size: 1.1em; /* 表頭字體大小 */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶數行背景顏色 */
+}
+
+ul {
+    padding-left: 20px; /* 左側內距 */
+    margin: 0; /* 無外距 */
+    color: #555; /* 字體顏色 */
+}
