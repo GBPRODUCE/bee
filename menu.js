@@ -10,3 +10,13 @@
                 mainContent.style.marginLeft = '200px';
             }
         }
+
+// 在 menu.js 中添加
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("sidebar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("sidebar-container").innerHTML = data;
+        })
+        .catch(error => console.error("Error loading sidebar:", error));
+});
