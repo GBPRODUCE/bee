@@ -11,7 +11,7 @@
             }
         }
 
-// 在 menu.js 中添加
+// 調用siderbar.html在 menu.js 中添加
 document.addEventListener("DOMContentLoaded", function() {
     fetch("sidebar.html")
         .then(response => response.text())
