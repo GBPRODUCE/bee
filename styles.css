@@ -268,3 +268,29 @@ ul {
     margin: 0; /* 無外距 */
     color: #555; /* 字體顏色 */
 }
+
+/* 子分類設計 */
+.sidebar .menu-item {
+    position: relative;
+}
+
+.sidebar .submenu {
+    display: none;
+    padding-left: 20px; /* 子分類縮排 */
+}
+
+.sidebar .menu-item.active .submenu {
+    display: block; /* 點擊後顯示子分類 */
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.submenu a {
+    font-size: 0.9em;
+    color: #666;
+}
