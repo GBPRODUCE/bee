@@ -287,10 +287,10 @@ ul {
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: #333;
+    color: #eee;
 }
 
 .submenu a {
     font-size: 0.9em;
-    color: #666;
+    color: #eee;
 }
