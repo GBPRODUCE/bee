@@ -46,8 +46,8 @@ header a:hover {
  */
 .container {
     display: flex; /* 使用 Flexbox 排版 */
-    height: 90vh; /* 高度為視窗的 90% */
-    margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
+    height: 100vh; /* 高度為視窗的 100% */
+    margin-top: 50px; /* 向下移動，避免被固定的 header 遮住 */
 }
 
 /* 
