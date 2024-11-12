@@ -36,3 +36,16 @@ function initSidebarMenu() {
         });
     });
 }
+
+// 改善表格顯示
+function adjustTableWidth() {
+    const table = document.querySelector('table');
+    if (window.innerWidth < 768) {
+        table.style.width = '100%';
+    } else {
+        table.style.width = '';
+    }
+}
+
+window.addEventListener('resize', adjustTableWidth);
+document.addEventListener('DOMContentLoaded', adjustTableWidth);
