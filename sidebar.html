@@ -6,8 +6,7 @@
         <a href="#">補助資源專區</a>
         <div class="submenu">
             <a href="single-shipment.html">🪄補助功能表🪄</a>
-            <a href="https://gbproduce.github.io/Hearing-aid-warranty/" target="_blank" rel="noopener noreferrer" class="link-with-tooltip">📋智能保固書📋</a>
-                <div id="tooltip"></div>
+            <a href="https://gbproduce.github.io/Hearing-aid-warranty/" target="_blank" rel="noopener noreferrer">📋智能保固書📋</a>
             <a href="https://icfws.sfaa.gov.tw/login.jsp" target="_blank" rel="noopener noreferrer">💰代償墊付網💰</a>
         </div>
     </div>
@@ -34,20 +33,3 @@
     <a href="matter.html">📧事件回報表單📧</a>
     <a href="question.html">❓常見使用說明❓</a>
 </div>
-
-<script>
-    // JavaScript控制動態提示
-        document.querySelector('.link-with-tooltip').addEventListener('mouseover', function(event) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = 'block';
-            tooltip.innerText = '填寫欄位:購買民眾資訊、公司行號名稱、型號、序號、保固期間、外觀。存檔列印:使用系統視窗列印、印表機選「另存PDF」，先下載再列印檔案避免跑版。開發者僅知部分門市資訊欲使用之門市請填寫事件回報。';
-        });
-        document.querySelector('.link-with-tooltip').addEventListener('mousemove', function(event) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.top = event.pageY + 10 + 'px';
-            tooltip.style.left = event.pageX + 10 + 'px';
-        });
-        document.querySelector('.link-with-tooltip').addEventListener('mouseout', function() {
-            document.getElementById('tooltip').style.display = 'none';
-        });
-</script>
