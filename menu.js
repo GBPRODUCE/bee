@@ -36,3 +36,20 @@ function initSidebarMenu() {
         });
     });
 }
+
+
+
+// JavaScript控制動態提示
+        document.querySelector('.link-with-tooltip').addEventListener('mouseover', function(event) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'block';
+            tooltip.innerText = '這是連結的使用說明';
+        });
+        document.querySelector('.link-with-tooltip').addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.top = event.pageY + 10 + 'px';
+            tooltip.style.left = event.pageX + 10 + 'px';
+        });
+        document.querySelector('.link-with-tooltip').addEventListener('mouseout', function() {
+            document.getElementById('tooltip').style.display = 'none';
+        });
