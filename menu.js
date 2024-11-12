@@ -43,7 +43,7 @@ function initSidebarMenu() {
         document.querySelector('.link-with-tooltip').addEventListener('mouseover', function(event) {
             const tooltip = document.getElementById('tooltip');
             tooltip.style.display = 'block';
-            tooltip.innerText = '這是連結的使用說明';
+            tooltip.innerText = '填寫欄位:購買民眾資訊、公司行號名稱、型號、序號、保固期間、外觀。存檔列印:使用系統視窗列印、印表機選「另存PDF」，先下載再列印檔案避免跑版。';
         });
         document.querySelector('.link-with-tooltip').addEventListener('mousemove', function(event) {
             const tooltip = document.getElementById('tooltip');
