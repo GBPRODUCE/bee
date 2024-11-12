@@ -241,11 +241,11 @@ tr:nth-child(even) {
     white-space: nowrap;
     background-color: none;
     color: #fff;
-    padding: 10px;
-    font-size: 1.2em;
+    padding: 8px;
+    font-size: 1.5em;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 80%;
     z-index: 1000;
 }
 
