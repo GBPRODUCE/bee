@@ -297,11 +297,3 @@ ul {
     font-size: 0.9em;
     color: #eee;
 }
-
-/* 表格縮放 */
-@media (max-width: 768px) {
-    .main-content table {
-        transform: scale(0.8); /* 縮小表格到 80% */
-        transform-origin: top left; /* 定位縮放原點 */
-    }
-}
