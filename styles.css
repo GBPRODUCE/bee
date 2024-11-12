@@ -98,6 +98,7 @@ header a:hover {
     margin-left: 0; /* 預設左側無偏移 */
     padding: 20px; /* 內距為 20px */
     transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
+    overflow-x: auto; /* 水平滾動 */
 }
 
 /* 
@@ -213,8 +214,9 @@ table {
     border-collapse: collapse; /* 去除邊框重疊 */
     margin-top: 20px; /* 上方間距 */
     border-radius: 8px; /* 圓角 */
-    overflow: hidden; /* 超出部分隱藏 */
+    overflow: auto; /* 超出部分允許水平和垂直滾動 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+    min-width: 600px; /* 設置表格的最小寬度 */
 }
 
 th, td {
