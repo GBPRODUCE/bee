@@ -23,7 +23,7 @@ header {
     top: 0; /* 定位到頂部 */
     left: 0; /* 定位到左側 */
     width: 100%; /* 佔滿整個頁面寬度 */
-    z-index: 1000; /* 設定疊層順序確保 header 在最上層 */
+    z-index: 998; /* 設定疊層順序確保 header 不在最上層 */
     transition: left 0.3s ease; /* 左側滑動效果過渡 */
     font-size: 1.2em; /* 調整字體大小 */
 }
