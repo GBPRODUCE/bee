@@ -36,20 +36,3 @@ function initSidebarMenu() {
         });
     });
 }
-
-
-
-// JavaScript控制動態提示
-        document.querySelector('.link-with-tooltip').addEventListener('mouseover', function(event) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = 'block';
-            tooltip.innerText = '填寫欄位:購買民眾資訊、公司行號名稱、型號、序號、保固期間、外觀。存檔列印:使用系統視窗列印、印表機選「另存PDF」，先下載再列印檔案避免跑版。開發者僅知部分門市資訊欲使用之門市請填寫事件回報。';
-        });
-        document.querySelector('.link-with-tooltip').addEventListener('mousemove', function(event) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.top = event.pageY + 10 + 'px';
-            tooltip.style.left = event.pageX + 10 + 'px';
-        });
-        document.querySelector('.link-with-tooltip').addEventListener('mouseout', function() {
-            document.getElementById('tooltip').style.display = 'none';
-        });
