@@ -45,7 +45,7 @@ header a:hover {
  */
 .container {
     display: flex; /* 使用 Flexbox 排版 */
-    height: 90vh; /* 高度為視窗的 100% */
+    height: 90vh; /* 高度為視窗的 90% */
     margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
 }
 
@@ -98,7 +98,6 @@ header a:hover {
     margin-left: 0; /* 預設左側無偏移 */
     padding: 20px; /* 內距為 20px */
     transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
-    overflow-x: auto; /* 水平滾動 */
 }
 
 /* 
@@ -216,7 +215,6 @@ table {
     border-radius: 8px; /* 圓角 */
     overflow: hidden; /* 超出部分隱藏 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
-    min-width: 600px; /* 設置表格的最小寬度 */
 }
 
 th, td {
@@ -295,4 +293,17 @@ ul {
 .submenu a {
     font-size: 0.9em;
     color: #eee;
+}
+
+/* 提示框樣式 */
+#tooltip {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    max-width: 200px; /* 限制提示框的寬度 */
+    white-space: normal; /* 啟用自動換行 */
 }
