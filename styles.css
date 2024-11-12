@@ -15,7 +15,6 @@ body {
 包含固定位置、背景色、字體顏色及定位等 
 */
 header {
-    display: none;
     background-color: #4a4a4a; /* 設定標頭的背景顏色為深灰色 */
     color: #fff; /* 字體顏色為白色 */
     text-align: center; /* 文字置中對齊 */
@@ -215,7 +214,7 @@ table {
     border-collapse: collapse; /* 去除邊框重疊 */
     margin-top: 20px; /* 上方間距 */
     border-radius: 8px; /* 圓角 */
-    overflow: auto; /* 超出部分允許水平和垂直滾動 */
+    overflow: hidden; /* 超出部分隱藏 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
     min-width: 600px; /* 設置表格的最小寬度 */
 }
