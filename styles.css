@@ -15,6 +15,7 @@ body {
 包含固定位置、背景色、字體顏色及定位等 
 */
 header {
+    display: none;
     background-color: #4a4a4a; /* 設定標頭的背景顏色為深灰色 */
     color: #fff; /* 字體顏色為白色 */
     text-align: center; /* 文字置中對齊 */
