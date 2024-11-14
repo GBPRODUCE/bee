@@ -219,7 +219,7 @@ table {
 
 th, td {
     padding: 15px; /* 表格內距 */
-    text-align: left; /* 左對齊 */
+    text-align: center; /* 置中 */
     border-bottom: 1px solid #ddd; /* 下方邊框 */
     color: #333; /* 字體顏色 */
 }
