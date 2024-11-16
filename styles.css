@@ -105,6 +105,7 @@ header a:hover {
  */
 .login-container {
     width: 100%; /* 寬度佔滿 */
+    max-width:900px; /* 最大寬度900px */
     padding: 20px; /* 內距為 20px */
     background: #fff; /* 背景顏色白色 */
     border-radius: 8px; /* 圓角效果 */
