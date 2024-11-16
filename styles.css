@@ -96,7 +96,7 @@ header a:hover {
     align-items: center; /* 垂直居中對齊 */
     background: #f4f6f9; /* 背景色為淺灰色 */
     margin-left: 0; /* 預設左側無偏移 */
-    padding: 20px; /* 內距為 20px */
+    padding: 5px; /* 內距為 5px */
     transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
 }
 
