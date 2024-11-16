@@ -307,3 +307,21 @@ ul {
     max-width: 200px; /* 限制提示框的寬度 */
     white-space: normal; /* 啟用自動換行 */
 }
+
+        /* 美化滾動條 */
+        ::-webkit-scrollbar {
+            width: 8px; /* 滾動條寬度 */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FFE4A1; /* 滾動條背景 */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD700; /* 滾動條滑塊顏色 */
+            border-radius: 10px; /* 滑塊圓角 */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFC107; /* 滑塊滑過時的顏色 */
+        }
