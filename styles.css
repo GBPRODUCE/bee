@@ -111,24 +111,32 @@ header a:hover {
     border-radius: 8px; /* 圓角效果 */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* 加入陰影 */
 }
+.Alogin-container {
+    width: 100%; /* 寬度佔滿 */
+    max-width:900px; /* 最大寬度900px */
+    padding: 30px; /* 內距為 30px */
+    background: #fff; /* 背景顏色白色 */
+    border-radius: 8px; /* 圓角效果 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* 加入陰影 */
+}
+
 
 /* 登入表單的標題、子標題、段落文字樣式 */
-.login-container h1, .login-container h2, .login-container p {
+.login-container h1, .login-container h2, .login-container p,.Alogin-container h1,.Alogin-container h2,.Alogin-container p {
     text-align: center; /* 文字置中 */
     color: #333; /* 字體顏色深灰色 */
 }
 
-.login-container h1 {
+.login-container h1,.Alogin-container h1 {
     font-size: 1.8em; /* 標題字體大小 */
     margin-bottom: 10px; /* 下方間距 */
 }
 
-.login-container p {
+.login-container p,.Alogin-container p {
     font-size: 1.1em; /* 段落文字大小 */
     color: #777; /* 淺灰色文字 */
     margin-bottom: 20px; /* 下方間距 */
 }
-
 /* 
 表單項目的樣式
  */
