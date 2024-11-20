@@ -243,6 +243,11 @@ th {
 tr:nth-child(even) {
     background-color: #f9f9f9; /* 偶數行背景顏色 */
 }
+
+table a {
+    text-decoration: none; /* 去除連結的底線 */
+    color: 	#FF5809; /* 連結文字顏色 */
+}
 /* 跑馬燈的容器樣式 */
 .marquee-container {
     overflow: hidden;
