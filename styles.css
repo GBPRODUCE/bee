@@ -67,6 +67,7 @@ header a:hover {
     justify-content: flex-start; /* 垂直對齊上方 */
     transition: left 0.3s ease; /* 左側滑動效果過渡 */
     z-index: 999; /* 疊層順序高於大部分元素，但低於 header */
+    overflow-y: auto; /* 啟用垂直滾動條 */
 }
 
 /* 
