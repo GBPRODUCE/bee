@@ -1,7 +1,3 @@
-/* 
-設定主要的頁面樣式，包括字體、背景顏色和基本間距。
-這些設置適用於整體頁面的外觀與感覺，確保一致性。
-*/
 body {
     font-family: "Microsoft JhengHei", Arial, sans-serif; /* 使用 "Microsoft JhengHei" 字型，若無則使用 Arial 或 sans-serif */
     background-color: #f4f6f9; /* 設定頁面背景為淺灰色 */
@@ -58,7 +54,7 @@ header a:hover {
     left: -200px; /* 預設隱藏在左側 (-200px) */
     width: 160px; /* 側邊欄寬度 */
     height: 100%; /* 高度佔滿頁面 */
-    background-color: #4a4a4a; /* 背景顏色深灰色 */
+    background-color: #FFD700; /* 背景顏色深灰色 */
     color: #fff; /* 字體顏色白色 */
     padding: 20px; /* 內距 20px */
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
@@ -201,7 +197,7 @@ button:hover {
     position: fixed; /* 固定位置 */
     top: 20px; /* 頂端偏移 */
     left: 20px; /* 左側偏移 */
-    background-color: #4a4a4a; /* 背景顏色 */
+    background-color: #FFD700; /* 背景顏色 */
     color: #fff; /* 字體顏色 */
     padding: 10px 20px; /* 內距 */
     border-radius: 5px; /* 圓角 */
@@ -211,7 +207,7 @@ button:hover {
 }
 
 .menu-toggle:hover {
-    background-color: #6a6a6a; /* 滑鼠懸停時的背景色 */
+    background-color: #FFE4A1; /* 滑鼠懸停時的背景色 */
 }
 
 /* 
