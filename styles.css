@@ -54,8 +54,8 @@ header a:hover {
     left: -200px; /* 預設隱藏在左側 (-200px) */
     width: 160px; /* 側邊欄寬度 */
     height: 100%; /* 高度佔滿頁面 */
-    background-color: #FFE4A1; /* 背景顏色深灰色 */
-    color: #fff; /* 字體顏色白色 */
+    background-color: #FFE4A1; /* 背景顏色淺黃色 */
+    color: #000000; /* 字體顏色黑色 */
     padding: 20px; /* 內距 20px */
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
     display: flex; /* 使用 Flexbox 排版 */
