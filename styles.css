@@ -71,7 +71,7 @@ header a:hover {
  */
 .sidebar a {
     text-decoration: none; /* 去除底線 */
-    color: #eee; /* 字體顏色為淡灰色 */
+    color: #000000; /* 字體顏色為黑色 */
     padding: 12px; /* 內距為 12px */
     margin: 5px 0; /* 每個連結上下間距 5px */
     display: block; /* 每個連結占據一整行 */
