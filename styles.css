@@ -125,14 +125,14 @@ header a:hover {
 }
 
 .login-container h1,.Alogin-container h1 {
-    font-size: 1.8em; /* 標題字體大小 */
-    margin-bottom: 10px; /* 下方間距 */
+    font-size: 2em; /* 標題字體大小 */
+    margin-bottom: 5px; /* 下方間距 */
 }
 
 .login-container p,.Alogin-container p {
-    font-size: 1.1em; /* 段落文字大小 */
+    font-size: 1em; /* 段落文字大小 */
     color: #777; /* 淺灰色文字 */
-    margin-bottom: 20px; /* 下方間距 */
+    margin-bottom: 5px; /* 下方間距 */
 }
 /* 
 表單項目的樣式
