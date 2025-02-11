@@ -73,9 +73,9 @@ header a:hover {
     text-decoration: none; /* 去除底線 */
     color: #000000; /* 字體顏色為黑色 */
     padding: 12px; /* 內距為 12px */
-    margin: 5px 0; /* 每個連結上下間距 5px */
+    margin: 1px 0; /* 每個連結上下間距 1px */
     display: block; /* 每個連結占據一整行 */
-    border-radius: 5px; /* 圓角效果 */
+    border-radius: 8px; /* 圓角效果 */
     transition: background 0.3s; /* 背景顏色過渡效果 */
 }
 
