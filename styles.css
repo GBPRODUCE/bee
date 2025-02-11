@@ -195,12 +195,12 @@ button:hover {
  */
 .menu-toggle {
     position: fixed; /* 固定位置 */
-    top: 20px; /* 頂端偏移 */
-    left: 20px; /* 左側偏移 */
+    top: 10px; /* 頂端偏移 */
+    left: 10px; /* 左側偏移 */
     background-color: #FFD700; /* 背景顏色 */
-    color: #fff; /* 字體顏色 */
-    padding: 10px 20px; /* 內距 */
-    border-radius: 5px; /* 圓角 */
+    color: #3498db; /* 字體顏色 */
+    padding: 10px 15px; /* 內距 */
+    border-radius: 8px; /* 圓角 */
     cursor: pointer; /* 滑鼠指標 */
     z-index: 1001; /* 疊層順序 */
     font-weight: bold; /* 字體加粗 */
@@ -223,7 +223,7 @@ table {
 }
 
 th, td {
-    padding: 15px; /* 表格內距 */
+    padding: 5px; /* 表格內距 */
     text-align: center; /* 置中 */
     border-bottom: 1px solid #ddd; /* 下方邊框 */
     color: #333; /* 字體顏色 */
@@ -234,35 +234,31 @@ th {
     color: #fff; /* 表頭字體顏色 */
     font-weight: bold; /* 表頭字體加粗 */
     text-align: center; /* 置中 */
-    font-size: 1.1em; /* 表頭字體大小 */
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9; /* 偶數行背景顏色 */
+    font-size: 1em; /* 表頭字體大小 */
 }
 
 table a {
     text-decoration: none; /* 去除連結的底線 */
     color: 	#FF5809; /* 連結文字顏色 */
 }
+
 /* 跑馬燈的容器樣式 */
 .marquee-container {
     overflow: hidden;
     white-space: nowrap;
     background-color: none;
     color: #fff;
-    padding: 8px;
+    padding: 0;
     font-size: 1.5em;
     position: fixed;
     top: 0;
-    width: 80%;
+    width: 100%;
     z-index: 1000;
 }
 
 /* 跑馬燈文字樣式 */
 .marquee-text {
     display: inline-block;
-    padding-left: 20%;
     animation: marquee 10s linear infinite;
     color:#0000C6;
 }
@@ -286,7 +282,7 @@ ul {
 
 .sidebar .submenu {
     display: none;
-    padding-left: 20px; /* 子分類縮排 */
+    padding-left: 10px; /* 子分類縮排 */
 }
 
 .sidebar .menu-item.active .submenu {
@@ -295,7 +291,7 @@ ul {
 
 .sidebar a {
     display: block;
-    padding: 10px;
+    padding: 5px;
     text-decoration: none;
     color: #eee;
 }
@@ -305,33 +301,17 @@ ul {
     color: #eee;
 }
 
-/* 提示框樣式 */
-#tooltip {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9em;
-    max-width: 200px; /* 限制提示框的寬度 */
-    white-space: normal; /* 啟用自動換行 */
+/* 美化滾動條 */
+::-webkit-scrollbar {
+    width: 8px; /* 滾動條寬度 */
 }
-
-        /* 美化滾動條 */
-        ::-webkit-scrollbar {
-            width: 8px; /* 滾動條寬度 */
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #FFE4A1; /* 滾動條背景 */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #FFD700; /* 滾動條滑塊顏色 */
-            border-radius: 10px; /* 滑塊圓角 */
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #FFC107; /* 滑塊滑過時的顏色 */
-        }
+::-webkit-scrollbar-track {
+    background: #FFE4A1; /* 滾動條背景 */
+}
+::-webkit-scrollbar-thumb {
+    background: #FFD700; /* 滾動條滑塊顏色 */
+    border-radius: 8px; /* 滑塊圓角 */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #FFC107; /* 滑塊滑過時的顏色 */
+}
