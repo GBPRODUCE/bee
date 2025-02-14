@@ -6,38 +6,6 @@ body {
     padding: 0; /* 移除頁面的內距 */
 }
 
-/* 設定標頭(header)的樣式包含固定位置、背景色、字體顏色及定位等 */
-header {
-    background-color: #4a4a4a; /* 設定標頭的背景顏色為深灰色 */
-    color: #fff; /* 字體顏色為白色 */
-    text-align: center; /* 文字置中對齊 */
-    padding: 10px 0; /* 上下各留 10px 的內距 */
-    position: fixed; /* 固定在頁面上方 */
-    top: 0; /* 定位到頂部 */
-    left: 0; /* 定位到左側 */
-    width: 100%; /* 佔滿整個頁面寬度 */
-    z-index: 998; /* 設定疊層順序確保 header 不在最上層 */
-    transition: left 0.3s ease; /* 左側滑動效果過渡 */
-    font-size: 1.2em; /* 調整字體大小 */
-}
-
-/* 設定 header 中連結的樣式 */
-header a {
-    text-decoration: none; /* 去除連結的底線 */
-    color: #fff; /* 連結文字顏色設為白色 */
-}
-
-header a:hover {
-    text-decoration: underline; /* 滑鼠懸停時顯示底線 */
-}
-
-/* 主要容器(container)的樣式 */
-.container {
-    display: flex; /* 使用 Flexbox 排版 */
-    height: 90vh; /* 高度為視窗的 90% */
-    margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
-}
-
 /* 側邊欄(sidebar)樣式 */
 .sidebar {
     position: fixed; /* 固定位置 */
@@ -56,7 +24,6 @@ header a:hover {
     z-index: 999; /* 疊層順序高於大部分元素，但低於 header */
     overflow-y: auto; /* 啟用垂直滾動條 */
 }
-
 /* 側邊欄中的連結樣式 */
 .sidebar a {
     text-decoration: none; /* 去除底線 */
@@ -67,11 +34,36 @@ header a:hover {
     border-radius: 8px; /* 圓角效果 */
     transition: background 0.3s; /* 背景顏色過渡效果 */
 }
-
 .sidebar a:hover {
     background-color:#3d3d3d; /* 滑鼠懸停時的背景色為稍淺的灰色 */
 }
+/* 子分類設計 */
+.sidebar .menu-item {
+    position: relative;
+}
 
+.sidebar .submenu {
+    display: none;
+    padding-left: 10px; /* 子分類縮排 */
+}
+
+.sidebar .menu-item.active .submenu {
+    display: block; /* 點擊後顯示子分類 */
+}
+
+.sidebar a,.submenu a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #eee;
+}
+
+/* 主要容器(container)的樣式 */
+.container {
+    display: flex; /* 使用 Flexbox 排版 */
+    height: 90vh; /* 高度為視窗的 90% */
+    margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
+}
 /* 主要內容區(main-content)樣式 */
 .main-content {
     flex: 1; /* 占據剩餘空間 */
@@ -84,7 +76,7 @@ header a:hover {
     transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
 }
 
-/* 主頁容器(login-container)樣式 */
+/* 主頁容器樣式 */
 .login-container,.Alogin-container {
     width: 100%; /* 寬度佔滿 */
     background: #fff; /* 背景顏色白色 */
@@ -96,49 +88,28 @@ header a:hover {
     padding: 20px; /* 內距為 20px */
     
 }
-/* 補助功能表容器(Alogin-container)樣式 */
 .Alogin-container {
     max-width:900px; /* 最大寬度900px */
     padding: 30px; /* 內距為 30px */
 }
-
-
-/* 登入表單的標題、子標題、段落文字樣式 */
 .login-container h1, .login-container p {
     text-align: center; /* 文字置中 */
     color: #777; /* 字體顏色深灰色 */
     margin-bottom: 5px; /* 下方間距 */
 }
-
 .login-container h1 {
     font-size: 2em; /* 標題字體大小 */
 }
-
 .login-container p {
     font-size: 1em; /* 段落文字大小 */
-
 }
+
 /* 表單項目的樣式 */
 label {
     display: block; /* 占據整行 */
     margin-bottom: 5px; /* 與下方間距 */
     font-weight: bold; /* 字體加粗 */
     color: #333; /* 字體顏色 */
-}
-
-input {
-    width: calc(100% - 20px); /* 寬度調整以符合容器 */
-    padding: 12px; /* 內距 */
-    border: 1px solid #ddd; /* 边框顏色 */
-    border-radius: 5px; /* 圓角 */
-    font-size: 16px; /* 字體大小 */
-    background-color: #f9f9f9; /* 背景顏色 */
-    transition: border 0.3s; /* 邊框過渡效果 */
-}
-
-input:focus {
-    border-color: #3498db; /* 聚焦時邊框顏色 */
-    outline: none; /* 移除預設的邊框 */
 }
 
 button {
@@ -154,7 +125,6 @@ button {
     margin-top: 10px; /* 上方間距 */
     transition: background 0.3s; /* 背景顏色過渡效果 */
 }
-
 button:hover {
     background: #2980b9; /* 滑鼠懸停時背景色 */
 }
@@ -172,7 +142,6 @@ button:hover {
     z-index: 1001; /* 疊層順序 */
     font-weight: bold; /* 字體加粗 */
 }
-
 .menu-toggle:hover {
     background-color: #FFE4A1; /* 滑鼠懸停時的背景色 */
 }
@@ -186,14 +155,12 @@ table {
     overflow: hidden; /* 超出部分隱藏 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影 */
 }
-
 th, td {
     padding: 5px; /* 表格內距 */
     text-align: center; /* 置中 */
     border-bottom: 1px solid #ddd; /* 下方邊框 */
     color: #333; /* 字體顏色 */
 }
-
 th {
     background-color: #3498db; /* 表頭背景色 */
     color: #fff; /* 表頭字體顏色 */
@@ -201,10 +168,14 @@ th {
     text-align: center; /* 置中 */
     font-size: 1em; /* 表頭字體大小 */
 }
-
 table a {
     text-decoration: none; /* 去除連結的底線 */
     color: 	#FF5809; /* 連結文字顏色 */
+}
+ul {
+    padding-left: 20px; /* 左側內距 */
+    margin: 0; /* 無外距 */
+    color: #555; /* 字體顏色 */
 }
 
 select {
@@ -213,10 +184,18 @@ select {
     outline: none;                  /* 移除外框 */
     text-align: center;             /* 文字水平置中 */
 }
-ul {
-    padding-left: 20px; /* 左側內距 */
-    margin: 0; /* 無外距 */
-    color: #555; /* 字體顏色 */
+input {
+    width: calc(100% - 20px); /* 寬度調整以符合容器 */
+    padding: 12px; /* 內距 */
+    border: 1px solid #ddd; /* 边框顏色 */
+    border-radius: 5px; /* 圓角 */
+    font-size: 16px; /* 字體大小 */
+    background-color: #f9f9f9; /* 背景顏色 */
+    transition: border 0.3s; /* 邊框過渡效果 */
+}
+input:focus {
+    border-color: #3498db; /* 聚焦時邊框顏色 */
+    outline: none; /* 移除預設的邊框 */
 }
 
 /* 跑馬燈的容器樣式 */
@@ -242,24 +221,6 @@ ul {
 @keyframes marquee {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
-}
-
-/* 子分類設計 */
-.sidebar .menu-item {
-    position: relative;
-}
-.sidebar .submenu {
-    display: none;
-    padding-left: 10px; /* 子分類縮排 */
-}
-.sidebar .menu-item.active .submenu {
-    display: block; /* 點擊後顯示子分類 */
-}
-.sidebar a,.submenu a {
-    display: block;
-    padding: 5px;
-    text-decoration: none;
-    color: #eee;
 }
 
 /* 滾動條 */
