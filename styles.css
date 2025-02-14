@@ -6,10 +6,7 @@ body {
     padding: 0; /* 移除頁面的內距 */
 }
 
-/* 
-設定標頭(header)的樣式
-包含固定位置、背景色、字體顏色及定位等 
-*/
+/* 設定標頭(header)的樣式包含固定位置、背景色、字體顏色及定位等 */
 header {
     background-color: #4a4a4a; /* 設定標頭的背景顏色為深灰色 */
     color: #fff; /* 字體顏色為白色 */
@@ -24,9 +21,7 @@ header {
     font-size: 1.2em; /* 調整字體大小 */
 }
 
-/* 
-設定 header 中連結的樣式
- */
+/* 設定 header 中連結的樣式 */
 header a {
     text-decoration: none; /* 去除連結的底線 */
     color: #fff; /* 連結文字顏色設為白色 */
@@ -36,18 +31,14 @@ header a:hover {
     text-decoration: underline; /* 滑鼠懸停時顯示底線 */
 }
 
-/* 
-主要容器(container)的樣式
- */
+/* 主要容器(container)的樣式 */
 .container {
     display: flex; /* 使用 Flexbox 排版 */
     height: 90vh; /* 高度為視窗的 90% */
     margin-top: 40px; /* 向下移動，避免被固定的 header 遮住 */
 }
 
-/* 
-側邊欄(sidebar)樣式
- */
+/* 側邊欄(sidebar)樣式 */
 .sidebar {
     position: fixed; /* 固定位置 */
     top: 0; /* 靠上方 */
@@ -66,9 +57,7 @@ header a:hover {
     overflow-y: auto; /* 啟用垂直滾動條 */
 }
 
-/* 
-側邊欄中的連結樣式
- */
+/* 側邊欄中的連結樣式 */
 .sidebar a {
     text-decoration: none; /* 去除底線 */
     color: #000000; /* 字體顏色為黑色 */
@@ -83,9 +72,7 @@ header a:hover {
     background-color:#3d3d3d; /* 滑鼠懸停時的背景色為稍淺的灰色 */
 }
 
-/* 
-主要內容區(main-content)樣式
- */
+/* 主要內容區(main-content)樣式 */
 .main-content {
     flex: 1; /* 占據剩餘空間 */
     display: flex; /* 使用 Flexbox 排版 */
@@ -97,9 +84,7 @@ header a:hover {
     transition: margin-left 0.3s ease; /* 左側偏移過渡效果 */
 }
 
-/* 
-登入表單容器(login-container)樣式
- */
+/* 首頁容器(login-container)樣式 */
 .login-container {
     width: 100%; /* 寬度佔滿 */
     max-width:500px; /* 最大寬度500px */
@@ -108,6 +93,7 @@ header a:hover {
     border-radius: 8px; /* 圓角效果 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 加入陰影 */
 }
+/* 補助功能表容器(Alogin-container)樣式 */
 .Alogin-container {
     width: 100%; /* 寬度佔滿 */
     max-width:900px; /* 最大寬度900px */
@@ -134,9 +120,7 @@ header a:hover {
     color: #777; /* 淺灰色文字 */
     margin-bottom: 5px; /* 下方間距 */
 }
-/* 
-表單項目的樣式
- */
+/* 表單項目的樣式 */
 .form-group {
     margin-bottom: 15px; /* 表單項目間距 */
 }
@@ -181,18 +165,7 @@ button:hover {
     background: #2980b9; /* 滑鼠懸停時背景色 */
 }
 
-/* 
-錯誤訊息樣式
- */
-.error-message {
-    color: red; /* 紅色字體 */
-    text-align: center; /* 置中 */
-    margin-bottom: 10px; /* 下方間距 */
-}
-
-/* 
-懸浮選單按鈕樣式
- */
+/* 懸浮選單按鈕樣式 */
 .menu-toggle {
     position: fixed; /* 固定位置 */
     top: 10px; /* 頂端偏移 */
@@ -210,9 +183,7 @@ button:hover {
     background-color: #FFE4A1; /* 滑鼠懸停時的背景色 */
 }
 
-/* 
-表格樣式
- */
+/* 表格樣式 */
 table {
     width: 100%; /* 寬度占滿 */
     border-collapse: collapse; /* 去除邊框重疊 */
@@ -240,6 +211,13 @@ th {
 table a {
     text-decoration: none; /* 去除連結的底線 */
     color: 	#FF5809; /* 連結文字顏色 */
+}
+
+select {
+    font-family: 標楷體, sans-serif; /* 指定字體 */
+    border: none;                   /* 移除邊框 */
+    outline: none;                  /* 移除外框 */
+    text-align: center;             /* 文字水平置中 */
 }
 
 /* 跑馬燈的容器樣式 */
@@ -301,7 +279,7 @@ ul {
     color: #eee;
 }
 
-/* 美化滾動條 */
+/* 滾動條 */
 ::-webkit-scrollbar {
     width: 8px; /* 滾動條寬度 */
 }
